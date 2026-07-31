@@ -1,5 +1,6 @@
 from skyfield.api import load
 import numpy as np
+from backend.explainable_ai import explain_collision
 
 SAFE_DISTANCE = 50  # km
 
@@ -9,6 +10,7 @@ def calculate_distance(pos1, pos2):
 
 
 def predict_collision():
+
     print("Predicting future collision risk...")
 
     url = "https://celestrak.org/NORAD/elements/gp.php?GROUP=active&FORMAT=tle"
@@ -46,10 +48,17 @@ def predict_collision():
             status = "Safe"
             print("✅ Safe")
 
+        # Explainable AI analysis
+        explanation = explain_collision(
+            round(distance, 2),
+            status
+        )
+
         results.append({
             "time": t.utc_strftime("%H:%M:%S"),
             "distance_km": round(distance, 2),
-            "status": status
+            "status": status,
+            "explanation": explanation
         })
 
     return {
@@ -61,5 +70,6 @@ def predict_collision():
 
 
 if __name__ == "__main__":
+
     output = predict_collision()
     print(output)

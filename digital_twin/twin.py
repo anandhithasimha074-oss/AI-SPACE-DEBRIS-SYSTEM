@@ -1,4 +1,5 @@
 from skyfield.api import load
+from datetime import datetime
 
 
 class DigitalTwin:
@@ -9,9 +10,13 @@ class DigitalTwin:
         self.latitude = 0
         self.longitude = 0
         self.altitude = 0
+        self.velocity = 0
         self.fuel = 100
+        self.risk_status = "Unknown"
+        self.last_updated = None
 
         self.satellite = satellite
+
 
     def update(self):
 
@@ -19,11 +24,30 @@ class DigitalTwin:
         t = ts.now()
 
         geocentric = self.satellite.at(t)
+
         subpoint = geocentric.subpoint()
 
-        self.latitude = subpoint.latitude.degrees
-        self.longitude = subpoint.longitude.degrees
-        self.altitude = subpoint.elevation.km
+        self.latitude = round(subpoint.latitude.degrees, 4)
+        self.longitude = round(subpoint.longitude.degrees, 4)
+        self.altitude = round(subpoint.elevation.km, 2)
+
+        self.last_updated = datetime.now().strftime("%H:%M:%S")
+
+        self.risk_status = "Monitoring"
+
+
+    def get_state(self):
+
+        return {
+            "satellite": self.name,
+            "latitude": self.latitude,
+            "longitude": self.longitude,
+            "altitude_km": self.altitude,
+            "fuel_percentage": self.fuel,
+            "risk_status": self.risk_status,
+            "last_updated": self.last_updated
+        }
+
 
     def display(self):
 
@@ -32,10 +56,11 @@ class DigitalTwin:
         print("=" * 50)
 
         print("Satellite :", self.name)
-        print(f"Latitude  : {self.latitude:.2f}")
-        print(f"Longitude : {self.longitude:.2f}")
-        print(f"Altitude  : {self.altitude:.2f} km")
-        print(f"Fuel      : {self.fuel}%")
+        print("Latitude :", self.latitude)
+        print("Longitude :", self.longitude)
+        print("Altitude :", self.altitude, "km")
+        print("Fuel :", self.fuel, "%")
+        print("Risk :", self.risk_status)
 
         print("=" * 50)
 
@@ -51,3 +76,5 @@ if __name__ == "__main__":
     twin.update()
 
     twin.display()
+
+    print(twin.get_state())
