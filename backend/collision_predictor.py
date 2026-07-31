@@ -26,6 +26,8 @@ def predict_collision():
         ts.now() + 10 / 1440
     ]
 
+    results = []
+
     for t in future_times:
 
         pos1 = sat1.at(t).position.km
@@ -38,10 +40,26 @@ def predict_collision():
         print("Distance :", round(distance, 2), "km")
 
         if distance < SAFE_DISTANCE:
+            status = "Collision Risk"
             print("⚠ Collision Risk")
         else:
+            status = "Safe"
             print("✅ Safe")
+
+        results.append({
+            "time": t.utc_strftime("%H:%M:%S"),
+            "distance_km": round(distance, 2),
+            "status": status
+        })
+
+    return {
+        "satellite_1": sat1.name,
+        "satellite_2": sat2.name,
+        "safe_distance_km": SAFE_DISTANCE,
+        "predictions": results
+    }
 
 
 if __name__ == "__main__":
-    predict_collision()
+    output = predict_collision()
+    print(output)
