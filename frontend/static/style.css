@@ -1,0 +1,205 @@
+body {
+    font-family: "Arial", sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #020617, #0f172a, #1e293b);
+    color: white;
+    text-align: center;
+}
+
+
+.navbar {
+    background: rgba(15, 23, 42, 0.95);
+    padding: 25px;
+    border-bottom: 1px solid #334155;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+}
+
+
+.navbar h2 {
+    margin: 0;
+    font-size: 32px;
+}
+
+
+.navbar p {
+    color: #94a3b8;
+}
+
+
+.overview {
+    padding: 40px;
+}
+
+
+.overview h1 {
+    font-size: 38px;
+    color: #38bdf8;
+}
+
+
+.overview p {
+    color: #cbd5e1;
+    font-size: 18px;
+}
+
+
+
+.dashboard {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    flex-wrap: wrap;
+    padding: 20px;
+}
+
+
+
+.card {
+    background: rgba(30, 41, 59, 0.85);
+    width: 280px;
+    padding: 25px;
+    border-radius: 18px;
+    border: 1px solid #334155;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+}
+
+
+
+.card h2,
+.card h3 {
+    color: #38bdf8;
+}
+
+
+.card p {
+    color: #e2e8f0;
+    line-height: 1.6;
+}
+
+
+
+.analytics,
+.visualization {
+    margin-top: 50px;
+}
+
+
+
+.analytics h2,
+.visualization h2 {
+    color: #7dd3fc;
+    font-size: 30px;
+}
+
+
+
+
+.orbit-box {
+
+    width: 70%;
+    margin: auto;
+    padding: 40px;
+    background: radial-gradient(circle, #1e40af, #020617);
+    border-radius: 25px;
+    border: 1px solid #38bdf8;
+    box-shadow: 0 0 30px rgba(56,189,248,0.3);
+
+}
+
+
+
+/* Digital Twin Space Simulation */
+
+
+.space-map {
+
+    position: relative;
+    width: 350px;
+    height: 350px;
+    margin: 30px auto;
+    border-radius: 50%;
+    border: 2px solid #38bdf8;
+
+}
+
+
+
+.earth {
+
+    position: absolute;
+    top: 130px;
+    left: 130px;
+    font-size: 70px;
+
+}
+
+
+
+.satellite {
+
+    position: absolute;
+    top: 20px;
+    left: 150px;
+    font-size: 35px;
+    animation: orbit 8s linear infinite;
+
+}
+
+
+
+.debris {
+
+    position: absolute;
+    font-size: 25px;
+    color: #7dd3fc;
+
+}
+
+
+
+.debris1 {
+
+    top: 60px;
+    left: 60px;
+
+}
+
+
+
+.debris2 {
+
+    bottom: 80px;
+    right: 70px;
+
+}
+
+
+
+.debris3 {
+
+    top: 200px;
+    right: 30px;
+
+}
+
+
+
+@keyframes orbit {
+
+
+    from {
+
+        transform: rotate(0deg) translateX(130px) rotate(0deg);
+
+    }
+
+
+    to {
+
+        transform: rotate(360deg) translateX(130px) rotate(-360deg);
+
+    }
+
+
+}
