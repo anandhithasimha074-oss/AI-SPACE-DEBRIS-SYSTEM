@@ -18,10 +18,9 @@ def predict_collision():
 
     satellites = load.tle_file(url)
 
-    ts = load.timescale()
+    satellites = satellites[:5]   # Analyze first 5 satellites
 
-    sat1 = satellites[0]
-    sat2 = satellites[1]
+    ts = load.timescale()
 
     future_times = [
         ts.now(),
@@ -29,74 +28,68 @@ def predict_collision():
         ts.now() + 10 / 1440
     ]
 
-    results = []
+    all_predictions = []
 
-    for t in future_times:
+    for i in range(len(satellites)):
+        for j in range(i + 1, len(satellites)):
 
-        pos1 = sat1.at(t).position.km
-        pos2 = sat2.at(t).position.km
+            sat1 = satellites[i]
+            sat2 = satellites[j]
 
-        distance = calculate_distance(pos1, pos2)
+            print("\n" + "=" * 60)
+            print(f"{sat1.name}  ↔  {sat2.name}")
+            print("=" * 60)
 
-        print("-" * 40)
-        print("Time :", t.utc_strftime("%H:%M:%S"))
-        print("Distance :", round(distance, 2), "km")
+            results = []
 
+            for t in future_times:
 
-        if distance < SAFE_DISTANCE:
-            status = "Collision Risk"
-            print("⚠ Collision Risk")
+                pos1 = sat1.at(t).position.km
+                pos2 = sat2.at(t).position.km
 
-        else:
-            status = "Safe"
-            print("✅ Safe")
+                distance = calculate_distance(pos1, pos2)
 
+                if distance < SAFE_DISTANCE:
+                    status = "Collision Risk"
+                else:
+                    status = "Safe"
 
-        # Explainable AI
-        explanation = explain_collision(
-            round(distance, 2),
-            status
-        )
+                explanation = explain_collision(
+                    round(distance, 2),
+                    status
+                )
 
+                maneuver = reinforcement_decision(
+                    status,
+                    round(distance, 2)
+                )
 
-        # Reinforcement Learning decision
-        maneuver = reinforcement_decision(
-            status,
-            round(distance, 2)
-        )
+                print("-" * 40)
+                print("Time :", t.utc_strftime("%H:%M:%S"))
+                print("Distance :", round(distance, 2), "km")
+                print("Status :", status)
+                print("Explanation :", explanation)
+                print("Recommended Maneuver :", maneuver)
 
+                results.append({
+                    "time": t.utc_strftime("%H:%M:%S"),
+                    "distance_km": round(distance, 2),
+                    "status": status,
+                    "explanation": explanation,
+                    "recommended_maneuver": maneuver
+                })
 
-        results.append({
+            all_predictions.append({
+                "satellite_1": sat1.name,
+                "satellite_2": sat2.name,
+                "predictions": results
+            })
 
-            "time": t.utc_strftime("%H:%M:%S"),
-
-            "distance_km": round(distance, 2),
-
-            "status": status,
-
-            "explanation": explanation,
-
-            "recommended_maneuver": maneuver
-
-        })
-
-
-    return {
-
-        "satellite_1": sat1.name,
-
-        "satellite_2": sat2.name,
-
-        "safe_distance_km": SAFE_DISTANCE,
-
-        "predictions": results
-
-    }
-
+    return all_predictions
 
 
 if __name__ == "__main__":
 
     output = predict_collision()
 
-    print(output)
+    print("\nPrediction Completed Successfully!")

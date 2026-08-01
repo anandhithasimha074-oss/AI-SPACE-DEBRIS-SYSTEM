@@ -9,7 +9,21 @@ def load_satellite_data():
 
     print(f"Successfully loaded {len(satellites)} satellites.\n")
 
-    return satellites
+    satellite_list = []
+
+    for sat in satellites:
+        satellite_info = {
+            "name": sat.name,
+            "status": "SAFE",
+            "fuel": 100,
+            "collision_probability": 0,
+            "velocity": None,
+            "position": None
+        }
+
+        satellite_list.append(satellite_info)
+
+    return satellite_list
 
 
 if __name__ == "__main__":
@@ -18,4 +32,4 @@ if __name__ == "__main__":
     print("First 10 Satellites:\n")
 
     for satellite in satellites[:10]:
-        print(satellite.name)
+        print(satellite)
