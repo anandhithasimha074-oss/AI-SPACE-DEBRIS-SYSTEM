@@ -6,53 +6,62 @@ class ReinforcementAgent:
             "No Maneuver",
             "Increase Altitude",
             "Decrease Altitude",
-            "Change Orbit"
+            "Change Orbit",
+            "Emergency Collision Avoidance"
         ]
-
 
     def choose_action(self, risk_status, distance):
 
-        if risk_status == "Collision Risk":
+        if distance < 20:
+            action = "Emergency Collision Avoidance"
+            fuel = "Very High"
+            priority = "Critical"
 
-            if distance < 20:
-                action = "Change Orbit"
-                fuel = "High"
+        elif distance < 50:
+            action = "Change Orbit"
+            fuel = "High"
+            priority = "High"
 
-            elif distance < 50:
-                action = "Increase Altitude"
-                fuel = "Medium"
+        elif distance < 200:
+            action = "Increase Altitude"
+            fuel = "Medium"
+            priority = "Medium"
 
-            else:
-                action = "No Maneuver"
-                fuel = "Low"
+        elif distance < 500:
+            action = "Decrease Altitude"
+            fuel = "Low"
+            priority = "Low"
 
         else:
             action = "No Maneuver"
             fuel = "Zero"
-
+            priority = "Normal"
 
         return {
             "recommended_action": action,
+            "priority": priority,
             "fuel_consumption": fuel,
             "reason": self.get_reason(action)
         }
-
 
     def get_reason(self, action):
 
         reasons = {
 
             "No Maneuver":
-                "Current trajectory is safe, no correction required",
+                "Current orbital path is safe. Continue monitoring.",
 
             "Increase Altitude":
-                "Altitude adjustment provides safer separation from debris",
+                "Increasing altitude provides greater separation from nearby objects.",
 
             "Decrease Altitude":
-                "Lower orbit adjustment reduces collision probability",
+                "Lowering the orbit increases separation while conserving fuel.",
 
             "Change Orbit":
-                "Major trajectory correction required due to high collision risk"
+                "A significant orbital adjustment is recommended due to elevated collision risk.",
+
+            "Emergency Collision Avoidance":
+                "Immediate evasive maneuver required to prevent a possible collision."
         }
 
         return reasons[action]
@@ -62,7 +71,4 @@ def reinforcement_decision(risk_status, distance):
 
     agent = ReinforcementAgent()
 
-    return agent.choose_action(
-        risk_status,
-        distance
-    )
+    return agent.choose_action(risk_status, distance)
