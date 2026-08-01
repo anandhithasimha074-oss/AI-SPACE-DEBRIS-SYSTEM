@@ -71,4 +71,4 @@ def reinforcement_decision(risk_status, distance):
 
     agent = ReinforcementAgent()
 
-    return agent.choose_action(risk_status, distance)
+    return agent.choose_action(risk_status, distance) 
