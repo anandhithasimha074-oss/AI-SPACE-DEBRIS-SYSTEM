@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>AI-Based Debris System</title>
+<title>AI-Based Space Debris System</title>
 
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 
@@ -14,13 +14,11 @@
 
 </head>
 
-
 <body>
-
 
 <nav class="navbar">
 
-<h2>🚀 AI-Based Debris System</h2>
+<h2>🚀 AI-Based Space Debris System</h2>
 
 <p>
 Autonomous Space Debris Tracking, Collision Prediction & Satellite Protection Platform
@@ -28,20 +26,22 @@ Autonomous Space Debris Tracking, Collision Prediction & Satellite Protection Pl
 
 </nav>
 
-
+<section class="mission-alert">
+    <div id="alert-banner" class="alert-normal">
+        🟢 NORMAL OPERATION • All satellites are operating normally.
+    </div>
+</section>
 
 <section class="overview">
 
 <h1>Real-Time Monitoring Dashboard</h1>
-
 <p>
 AI-powered detection, tracking, collision prediction and satellite protection system.
 </p>
 
 </section>
 
-
-
+<!-- ===================== SYSTEM STATUS ===================== -->
 
 <section class="analytics">
 
@@ -49,42 +49,45 @@ AI-powered detection, tracking, collision prediction and satellite protection sy
 
 <div class="dashboard">
 
-
 <div class="card">
 <h3>🟢 System Status</h3>
-<p>ONLINE</p>
+<p id="system-status">ONLINE</p>
 <p>All modules operational</p>
 </div>
 
-
 <div class="card">
 <h3>🤖 AI Model</h3>
-<p>ACTIVE</p>
+<p id="ai-model-status">ACTIVE</p>
 <p>Detection engine running</p>
 </div>
 
-
 <div class="card">
 <h3>⚠️ Risk Monitoring</h3>
-<p>ACTIVE</p>
+<p id="monitor-status">ACTIVE</p>
 <p>Continuous analysis enabled</p>
 </div>
 
-
 <div class="card">
 <h3>📡 Data Connection</h3>
-<p>STABLE</p>
+<p id="connection-status">STABLE</p>
 <p>Real-time data flow</p>
 </div>
 
+<div class="card">
+<h3>🕒 Mission Clock</h3>
+
+<p id="utc-time">00:00:00 UTC</p>
+
+<p id="last-update">Last Update: --</p>
+
+<p id="mission-time">Mission Time: T+00:00:00</p>
+
+</div>
 
 </div>
 
 </section>
-
-
-
-
+<!-- ===================== CORE MODULES ===================== -->
 
 <section class="analytics">
 
@@ -92,58 +95,101 @@ AI-powered detection, tracking, collision prediction and satellite protection sy
 
 <div class="dashboard">
 
-
 <div class="card">
+
 <h2>🔍 Debris Detection</h2>
-<p>Status: Active</p>
-<p>Objects Detected: 1250</p>
-<p>Confidence: 95%</p>
+
+<p>
+Status:
+<span id="detection-status">Active</span>
+</p>
+
+<p>
+Objects Detected:
+<span id="objects-detected">1250</span>
+</p>
+
+<p>
+AI Confidence:
+<span id="ai-confidence">95%</span>
+</p>
+
 </div>
 
-
-
 <div class="card">
+
 <h2>⚡ Collision Prediction</h2>
-<p>Status: Monitoring</p>
-<p>Risk Level: Low</p>
-<p>Probability: 2%</p>
+
+<p>
+Status:
+<span id="collision-status">Monitoring</span>
+</p>
+
+<p>
+Risk Level:
+<span id="risk-level">LOW</span>
+</p>
+
+<p>
+Probability:
+<span id="collision-probability">2%</span>
+</p>
+
 </div>
 
-
-
 <div class="card">
+
 <h2>🛰️ Satellite Protection</h2>
-<p>Status: Protected</p>
-<p>Threat Level: Low</p>
-<p>Monitoring: Active</p>
+
+<p>
+Status:
+<span id="satellite-status">Protected</span>
+</p>
+
+<p>
+Threat Level:
+<span id="threat-level">LOW</span>
+</p>
+
+<p>
+Monitoring:
+<span id="monitoring-status">Active</span>
+</p>
+
 </div>
-
-
 
 <div class="card">
-<h2>🌌 Tracking System</h2>
-<p>Objects Tracked: 1250</p>
-<p>Orbit Data: Available</p>
-<p>Velocity: Stable</p>
-</div>
 
+<h2>🌌 Tracking System</h2>
+
+<p>
+Objects Tracked:
+<span id="objects-tracked">1250</span>
+</p>
+
+<p>
+Orbit Data:
+<span id="orbit-data">Available</span>
+</p>
+
+<p>
+Velocity:
+<span id="velocity-status">7.6 km/s</span>
+</p>
+
+</div>
 
 </div>
 
 </section>
 
-
-
-
-
+<!-- ===================== CHARTS ===================== -->
 
 <section class="visualization">
 
 <h2>AI Data Visualization</h2>
 
-
 <div class="dashboard">
-
 
 <div class="card">
 
@@ -153,8 +199,6 @@ AI-powered detection, tracking, collision prediction and satellite protection sy
 
 </div>
 
-
-
 <div class="card">
 
 <h3>📊 Collision Risk Trend</h3>
@@ -163,154 +207,143 @@ AI-powered detection, tracking, collision prediction and satellite protection sy
 
 </div>
 
-
 </div>
-
 
 </section>
 
-
-
-
-
-
+<!-- ===================== DIGITAL TWIN ===================== -->
 
 <section class="visualization">
 
-
 <h2>🌍 Space Monitoring Visualization</h2>
-
 
 <div class="orbit-box">
 
-
 <h3>Orbital Tracking View</h3>
-
 
 <div class="space-map">
 
+<div class="earth">🌍</div>
 
-<div class="earth">
-🌍
-</div>
+<div class="satellite">🛰️</div>
 
+<div class="debris debris1">✦</div>
 
-<div class="satellite">
-🛰️
-</div>
+<div class="debris debris2">✦</div>
 
-
-<div class="debris debris1">
-✦
-</div>
-
-
-<div class="debris debris2">
-✦
-</div>
-
-
-<div class="debris debris3">
-✦
-</div>
-
+<div class="debris debris3">✦</div>
 
 </div>
 
+<p>Satellite and debris movement visualization.</p>
 
-<p>
-Satellite and debris movement visualization.
-</p>
-
-
-<p>
-Digital Twin Simulation Module: Ready
-</p>
-
+<p>Digital Twin Simulation Module: Ready</p>
 
 </div>
-
 
 </section>
 
-
-
-
-
-
-
+<!-- ===================== MISSION INTELLIGENCE ===================== -->
 
 <section class="analytics">
 
 <h2>🚀 Mission Intelligence Center</h2>
 
-
 <div class="dashboard">
-
-
 
 <div class="card">
 
 <h2>🤖 AI Collision Prediction</h2>
 
-<p>Nearest Object: DEB-4821</p>
+<p>Nearest Object: <span id="nearest-object">DEB-4821</span></p>
 
-<p>Collision Probability: 3%</p>
+<p>Collision Probability:
+<span id="mission-probability">3%</span>
+</p>
 
-<p>Closest Approach: 12.5 km</p>
+<p>Closest Approach:
+<span id="closest-approach">12.5 km</span>
+</p>
 
-<p>Risk Level: LOW</p>
+<p>Risk Level:
+<span id="mission-risk">LOW</span>
+</p>
 
 </div>
-
-
-
-
 
 <div class="card">
 
 <h2>🛰️ Satellite Health Monitor</h2>
 
-<p>Satellite ID: SAT-001</p>
+<p>Satellite ID:
+<span id="satellite-id">SAT-001</span>
+</p>
 
-<p>Altitude: 550 km</p>
+<p>Altitude:
+<span id="altitude">550 km</span>
+</p>
 
-<p>Velocity: 7.6 km/s</p>
+<p>Velocity:
+<span id="velocity">7.6 km/s</span>
+</p>
 
-<p>Status: NORMAL</p>
+<p>Status:
+<span id="health-status">NORMAL</span>
+</p>
 
+<br>
+
+<label>🔋 Battery</label>
+
+<div class="progress-bar">
+    <div id="battery-bar" class="progress-fill" style="width:92%;">92%</div>
 </div>
 
+<br>
 
+<label>⛽ Fuel</label>
 
+<div class="progress-bar">
+    <div id="fuel-bar" class="progress-fill" style="width:74%;">74%</div>
+</div>
 
+<br>
+
+<label>📶 Signal</label>
+
+<div class="progress-bar">
+    <div id="signal-bar" class="progress-fill" style="width:100%;">100%</div>
+</div>
+
+</div>
 
 <div class="card">
 
 <h2>📡 Tracking Statistics</h2>
 
-<p>Objects Tracked: 35,000+</p>
+<p>Objects Tracked:
+<span id="tracking-count">35,000+</span>
+</p>
 
-<p>Active Satellites: 5,000+</p>
+<p>Active Satellites:
+<span id="active-satellites">5,000+</span>
+</p>
 
-<p>New Debris Detected: 24</p>
+<p>New Debris:
+<span id="new-debris">24</span>
+</p>
 
-<p>Tracking Status: ACTIVE</p>
+<p>Status:
+<span id="tracking-status">ACTIVE</span>
+</p>
 
 </div>
-
-
 
 </div>
 
 </section>
 
-
-
-
-
 <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
-
 
 </body>
 

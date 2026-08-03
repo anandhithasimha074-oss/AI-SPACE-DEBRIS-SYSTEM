@@ -2,14 +2,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
     console.log("AI Space Debris Tracking System Running");
 
+    // -----------------------------
+    // Debris Activity Chart
+    // -----------------------------
 
-    // Debris Activity Graph
+    const debrisChartCanvas = document.getElementById("debrisChart");
+    let debrisChart;
 
-    const debrisChart = document.getElementById("debrisChart");
+    if (debrisChartCanvas) {
 
-    if (debrisChart) {
-
-        new Chart(debrisChart, {
+        debrisChart = new Chart(debrisChartCanvas, {
 
             type: "line",
 
@@ -24,21 +26,19 @@ document.addEventListener("DOMContentLoaded", function () {
                     "20:00"
                 ],
 
-                datasets: [
-                    {
-                        label: "Tracked Debris Objects",
+                datasets: [{
 
-                        data: [
-                            820,
-                            950,
-                            1100,
-                            1180,
-                            1250,
-                            1320
-                        ]
+                    label: "Tracked Debris Objects",
 
-                    }
-                ]
+                    data: [820, 950, 1100, 1180, 1250, 1320],
+
+                    borderWidth: 2,
+
+                    tension: 0.4,
+
+                    fill: false
+
+                }]
 
             }
 
@@ -46,29 +46,22 @@ document.addEventListener("DOMContentLoaded", function () {
 
     }
 
+    // -----------------------------
+    // Collision Risk Chart
+    // -----------------------------
 
+    const riskChartCanvas = document.getElementById("riskChart");
+    let riskChart;
 
+    if (riskChartCanvas) {
 
+        riskChart = new Chart(riskChartCanvas, {
 
-    // Collision Risk Graph
+            type: "line",
 
+            data: {
 
-    const riskChart = document.getElementById("riskChart");
-
-
-    if (riskChart) {
-
-
-        new Chart(riskChart, {
-
-
-            type:"line",
-
-
-            data:{
-
-
-                labels:[
+                labels: [
                     "Day 1",
                     "Day 2",
                     "Day 3",
@@ -77,96 +70,263 @@ document.addEventListener("DOMContentLoaded", function () {
                     "Day 6"
                 ],
 
+                datasets: [{
 
-                datasets:[
+                    label: "Collision Risk %",
 
-                    {
+                    data: [4, 6, 5, 8, 3, 2],
 
-                    label:"Collision Risk %",
+                    borderWidth: 2,
 
-                    data:[
-                        4,
-                        6,
-                        5,
-                        8,
-                        3,
-                        2
-                    ]
+                    tension: 0.4,
 
-                    }
+                    fill: false
 
-                ]
-
+                }]
 
             }
 
-
         });
 
+    }
+
+    // -----------------------------
+    // Live Dashboard Simulation
+    // -----------------------------
+
+    function random(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    function updateDashboard() {
+
+        const detected = random(1200, 1400);
+        const tracked = random(34000, 36000);
+        const probability = random(1, 10);
+        const confidence = random(90, 99);
+        // Satellite Health Simulation
+
+const battery = random(80, 100);
+const fuel = random(60, 95);
+const signal = random(85, 100);
+
+        const nearestObject = "DEB-" + random(1000, 9999);
+
+        let risk = "LOW";
+
+        if (probability >= 7) {
+            risk = "HIGH";
+        } else if (probability >= 4) {
+            risk = "MEDIUM";
+        }
+        // -----------------------------
+// Mission Alert Banner
+// -----------------------------
+
+const alertBanner = document.getElementById("alert-banner");
+
+if (alertBanner) {
+
+    if (risk === "LOW") {
+
+        alertBanner.className = "alert-normal";
+
+        alertBanner.innerHTML =
+        "🟢 NORMAL OPERATION • All satellites are operating normally.";
 
     }
 
+    else if (risk === "MEDIUM") {
 
+        alertBanner.className = "alert-medium";
 
-
-
-
-
-    // Live AI Simulation
-
-
-    function updateSystemData(){
-
-
-        const riskValues = [
-            "LOW",
-            "MEDIUM",
-            "HIGH"
-        ];
-
-
-        const risk =
-        riskValues[Math.floor(Math.random()*3)];
-
-
-
-        console.log(
-            "AI Risk Level:",
-            risk
-        );
-
-
-
-        console.log(
-
-            "Tracked Objects:",
-            Math.floor(
-                Math.random()*5000 + 30000
-            )
-
-        );
-
-
-
-        console.log(
-
-            "Collision Probability:",
-            Math.floor(
-                Math.random()*10
-            )
-            +"%"
-
-        );
-
+        alertBanner.innerHTML =
+        "🟡 MEDIUM COLLISION RISK DETECTED • Continue monitoring.";
 
     }
 
+    else {
 
+        alertBanner.className = "alert-high";
 
-    setInterval(
-        updateSystemData,
-        5000
-    );
+        alertBanner.innerHTML =
+        "🔴 HIGH COLLISION RISK • Avoidance maneuver recommended.";
 
+    }
 
+}
+
+        // Update text values
+
+        if (document.getElementById("objects-detected"))
+            document.getElementById("objects-detected").textContent = detected;
+
+        if (document.getElementById("objects-tracked"))
+            document.getElementById("objects-tracked").textContent = tracked;
+
+        if (document.getElementById("tracking-count"))
+            document.getElementById("tracking-count").textContent = tracked;
+
+        if (document.getElementById("collision-probability"))
+            document.getElementById("collision-probability").textContent = probability + "%";
+
+        if (document.getElementById("mission-probability"))
+            document.getElementById("mission-probability").textContent = probability + "%";
+
+        if (document.getElementById("ai-confidence"))
+            document.getElementById("ai-confidence").textContent = confidence + "%";
+
+        if (document.getElementById("nearest-object"))
+            document.getElementById("nearest-object").textContent = nearestObject;
+
+        if (document.getElementById("risk-level")) {
+
+            const riskElement = document.getElementById("risk-level");
+
+            riskElement.textContent = risk;
+
+            if (risk === "LOW") {
+
+                riskElement.style.color = "#22c55e";
+
+            } else if (risk === "MEDIUM") {
+
+                riskElement.style.color = "#facc15";
+
+            } else {
+
+                riskElement.style.color = "#ef4444";
+
+            }
+
+        }
+
+        if (document.getElementById("mission-risk")) {
+
+            const missionRisk = document.getElementById("mission-risk");
+
+            missionRisk.textContent = risk;
+
+            if (risk === "LOW") {
+
+                missionRisk.style.color = "#22c55e";
+
+            } else if (risk === "MEDIUM") {
+
+                missionRisk.style.color = "#facc15";
+
+            } else {
+
+                missionRisk.style.color = "#ef4444";
+
+            }
+
+        }
+
+        // Update charts
+
+        if (debrisChart) {
+
+            debrisChart.data.datasets[0].data.shift();
+            debrisChart.data.datasets[0].data.push(detected);
+            debrisChart.update();
+
+        }
+
+        if (riskChart) {
+
+            riskChart.data.datasets[0].data.shift();
+            riskChart.data.datasets[0].data.push(probability);
+            riskChart.update();
+
+        }
+        // -----------------------------
+// Satellite Health Bars
+// -----------------------------
+
+const batteryBar = document.getElementById("battery-bar");
+
+if (batteryBar) {
+
+    batteryBar.style.width = battery + "%";
+    batteryBar.innerHTML = battery + "%";
+
+}
+
+const fuelBar = document.getElementById("fuel-bar");
+
+if (fuelBar) {
+
+    fuelBar.style.width = fuel + "%";
+    fuelBar.innerHTML = fuel + "%";
+
+}
+
+const signalBar = document.getElementById("signal-bar");
+
+if (signalBar) {
+
+    signalBar.style.width = signal + "%";
+    signalBar.innerHTML = signal + "%";
+
+}
+
+    }
+
+ // Run dashboard once
+updateDashboard();
+
+// Mission timer starts
+const missionStart = new Date();
+
+function updateClock() {
+
+    const now = new Date();
+
+    // UTC Time
+    const utc = now.toUTCString().split(" ")[4] + " UTC";
+
+    const utcElement = document.getElementById("utc-time");
+
+    if (utcElement) {
+
+        utcElement.textContent = utc;
+
+    }
+
+    // Last Update
+    const updateElement = document.getElementById("last-update");
+
+    if (updateElement) {
+
+        updateElement.textContent = "Last Update: " + now.toLocaleTimeString();
+
+    }
+
+    // Mission Timer
+    const diff = Math.floor((now - missionStart) / 1000);
+
+    const hrs = String(Math.floor(diff / 3600)).padStart(2, "0");
+    const mins = String(Math.floor((diff % 3600) / 60)).padStart(2, "0");
+    const secs = String(diff % 60).padStart(2, "0");
+
+    const missionElement = document.getElementById("mission-time");
+
+    if (missionElement) {
+
+        missionElement.textContent =
+            "Mission Time: T+" + hrs + ":" + mins + ":" + secs;
+
+    }
+
+}
+
+// Update clock every second
+setInterval(updateClock, 1000);
+
+// Update dashboard every 5 seconds
+setInterval(updateDashboard, 5000);
+
+// Run clock immediately
+updateClock();   
 });
