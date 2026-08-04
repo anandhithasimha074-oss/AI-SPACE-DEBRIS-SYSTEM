@@ -27,7 +27,6 @@ def predict_collision():
         log_info("Collision prediction started.")
 
         satellites = load.tle_file(CELESTRAK_URL)
-
         satellites = satellites[:SATELLITES_TO_ANALYZE]
 
         ts = load.timescale()
@@ -48,25 +47,35 @@ def predict_collision():
                 sat2 = satellites[j]
 
                 print("\n" + "=" * 60)
-                print(f"{sat1.name}  ↔  {sat2.name}")
+                print(f"{sat1.name} ↔ {sat2.name}")
                 print("=" * 60)
 
                 results = []
 
                 for t in future_times:
 
+                    # Position vectors
                     pos1 = sat1.at(t).position.km
                     pos2 = sat2.at(t).position.km
 
                     distance = calculate_distance(pos1, pos2)
 
-                    # Temporary orbital velocity value
-                    relative_velocity = 7.8
+                    # Velocity vectors
+                    velocity1 = sat1.at(t).velocity.km_per_s
+                    velocity2 = sat2.at(t).velocity.km_per_s
 
+                    # Relative velocity
+                    relative_velocity = round(
+                        float(np.linalg.norm(velocity1 - velocity2)),
+                        2
+                    )
+
+                    # Minutes until closest prediction time
                     time_to_closest = (
                         t.utc_datetime() - current_time.utc_datetime()
                     ).total_seconds() / 60
 
+                    # AI Prediction
                     ai_result = ai_predict_collision(
                         distance_km=round(float(distance), 2),
                         relative_velocity_kms=relative_velocity,
@@ -99,12 +108,14 @@ def predict_collision():
                     print("Distance :", round(float(distance), 2), "km")
                     print("Relative Velocity :", relative_velocity, "km/s")
                     print("Status :", status)
+                    print("AI Confidence :", ai_result["confidence"], "%")
                     print("Explanation :", explanation)
                     print("Recommended Maneuver :", maneuver)
 
                     log_info(
                         f"{sat1.name} - {sat2.name} | "
                         f"Distance: {round(float(distance), 2)} km | "
+                        f"Relative Velocity: {relative_velocity} km/s | "
                         f"Status: {status}"
                     )
 
@@ -113,6 +124,7 @@ def predict_collision():
                         "distance_km": round(float(distance), 2),
                         "relative_velocity_kms": relative_velocity,
                         "status": status,
+                        "confidence": ai_result["confidence"],
                         "explanation": explanation,
                         "recommended_maneuver": maneuver
                     })
