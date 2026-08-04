@@ -1,31 +1,39 @@
+import joblib
+import os
 import numpy as np
-from sklearn.ensemble import RandomForestClassifier
 
-# Example training data
-X = np.array([
-    [20, 7.5],
-    [35, 7.8],
-    [100, 7.4],
-    [10, 8.0],
-    [80, 7.6],
-    [45, 7.7]
-])
+# Load the trained model
+MODEL_PATH = os.path.join(os.path.dirname(__file__), "models", "collision_model.pkl")
+model = joblib.load(MODEL_PATH)
 
-# Labels
-# 1 = Collision Risk
-# 0 = Safe
-y = np.array([1, 1, 0, 1, 0, 0])
+print("AI Model loaded successfully!")
 
-model = RandomForestClassifier(random_state=42)
-model.fit(X, y)
+def predict_collision(distance_km, relative_velocity_kms, time_to_closest_min):
+    """
+    Predict collision risk.
 
-print("AI Model trained successfully!")
+    Returns:
+        1 -> Collision Risk
+        0 -> Safe Orbit
+    """
 
-test_data = np.array([[25, 7.8]])
+    input_data = np.array([[distance_km, relative_velocity_kms, time_to_closest_min]])
 
-prediction = model.predict(test_data)
+    prediction = model.predict(input_data)
 
-if prediction[0] == 1:
-    print("⚠ Collision Risk Predicted")
-else:
-    print("✅ Safe Orbit")
+    if prediction[0] == 1:
+        return {
+            "prediction": "Collision Risk",
+            "risk": 1
+        }
+    else:
+        return {
+            "prediction": "Safe Orbit",
+            "risk": 0
+        }
+
+
+# Example test
+if __name__ == "__main__":
+    result = predict_collision(25, 7.8, 6)
+    print(result)
