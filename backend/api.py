@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from skyfield.api import load
 
 from backend.collision_predictor import predict_collision
+from backend.ai_model import predict_collision as ai_predict_collision
 from digital_twin.twin import DigitalTwin
 from database.database import get_prediction_history
 from backend.config import (
@@ -46,6 +47,21 @@ def health():
 @app.get("/predict")
 def predict():
     return predict_collision()
+
+
+@app.get("/ai-predict")
+def ai_predict():
+    """
+    AI-based collision prediction using the trained Random Forest model.
+    Sample values are used for testing.
+    """
+    result = ai_predict_collision(
+        distance_km=25,
+        relative_velocity_kms=7.8,
+        time_to_closest_min=6
+    )
+
+    return result
 
 
 @app.get("/digital-twin")
