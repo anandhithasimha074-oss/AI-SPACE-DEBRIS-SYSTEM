@@ -16,13 +16,30 @@
 
 <body>
 
+<!-- ================= HERO HEADER ================= -->
+
+<header class="hero-header">
+
+    <h1>🚀 AI-Based Space Debris System</h1>
+
+    <p>
+        Autonomous Space Debris Tracking, Collision Prediction &
+        Satellite Protection Platform
+    </p>
+
+</header>
+
+<!-- ================= NAVIGATION ================= -->
+
 <nav class="navbar">
 
-<h2>🚀 AI-Based Space Debris System</h2>
-
-<p>
-Autonomous Space Debris Tracking, Collision Prediction & Satellite Protection Platform
-</p>
+    <ul class="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#system-status">System Status</a></li>
+        <li><a href="#modules">Modules</a></li>
+        <li><a href="#visualization">Visualization</a></li>
+        <li><a href="#mission">Mission Center</a></li>
+    </ul>
 
 </nav>
 
@@ -31,19 +48,35 @@ Autonomous Space Debris Tracking, Collision Prediction & Satellite Protection Pl
         🟢 NORMAL OPERATION • All satellites are operating normally.
     </div>
 </section>
+<section class="quick-stats">
 
-<section class="overview">
+    <div class="stat-box">
+        <h2>35,000+</h2>
+        <p>Tracked Debris</p>
+    </div>
 
-<h1>Real-Time Monitoring Dashboard</h1>
-<p>
-AI-powered detection, tracking, collision prediction and satellite protection system.
-</p>
+    <div class="stat-box">
+        <h2>5,000+</h2>
+        <p>Active Satellites</p>
+    </div>
+
+    <div class="stat-box">
+        <h2>99.2%</h2>
+        <p>Detection Accuracy</p>
+    </div>
+
+    <div class="stat-box">
+        <h2>24</h2>
+        <p>New Objects Today</p>
+    </div>
 
 </section>
 
+
+
 <!-- ===================== SYSTEM STATUS ===================== -->
 
-<section class="analytics">
+<section id="system-status" class="analytics">
 
 <h2>System Status</h2>
 
@@ -89,7 +122,7 @@ AI-powered detection, tracking, collision prediction and satellite protection sy
 </section>
 <!-- ===================== CORE MODULES ===================== -->
 
-<section class="analytics">
+<section id="modules" class="analytics">
 
 <h2>Core Monitoring Modules</h2>
 
@@ -185,7 +218,7 @@ Velocity:
 
 <!-- ===================== CHARTS ===================== -->
 
-<section class="visualization">
+<section id="visualization" class="visualization">
 
 <h2>AI Data Visualization</h2>
 
@@ -245,12 +278,45 @@ Velocity:
 
 <!-- ===================== MISSION INTELLIGENCE ===================== -->
 
-<section class="analytics">
+<section id="mission" class="analytics">
 
 <h2>🚀 Mission Intelligence Center</h2>
 
 <div class="dashboard">
+    <div class="card">
+    <h3>🛰 Debris Detection</h3>
+    <p id="debris-count">35000</p>
+</div>
 
+<div class="card">
+    <h3>⚠ Collision Risk</h3>
+    <p id="collision-risk">0.00%</p>
+</div>
+
+<div class="card">
+    <h3>🛡 Satellite Status</h3>
+    <p id="satellite-status">SAFE</p>
+</div>
+
+</div>
+
+<div class="simulation-controls">
+
+<button class="start-btn">▶ Start Simulation</button>
+
+<button class="pause-btn">⏸ Pause</button>
+
+<button class="reset-btn">🔄 Reset</button>
+
+</div>
+<div class="simulation-status">
+
+    Status:
+    <span id="simulation-status">READY</span>
+
+</div>
+
+<div class="dashboard">
 <div class="card">
 
 <h2>🤖 AI Collision Prediction</h2>
@@ -338,8 +404,138 @@ Velocity:
 </p>
 
 </div>
+</div>
+</section>
+<!-- ===================== SATELLITE FLEET STATUS ===================== -->
+
+<section id="satellite" class="analytics">
+
+    <h2>🛰 Satellite Fleet Status</h2>
+
+    <div class="table-container">
+
+        <table class="status-table">
+
+            <thead>
+                <tr>
+                    <th>Satellite ID</th>
+                    <th>Orbit</th>
+                    <th>Altitude</th>
+                    <th>Velocity</th>
+                    <th>Fuel</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                <tr>
+                    <td>SAT-001</td>
+                    <td>LEO</td>
+                    <td>550 km</td>
+                    <td>7.6 km/s</td>
+                    <td>74%</td>
+                    <td><span class="safe">SAFE</span></td>
+                </tr>
+
+                <tr>
+                    <td>SAT-002</td>
+                    <td>MEO</td>
+                    <td>20200 km</td>
+                    <td>3.9 km/s</td>
+                    <td>61%</td>
+                    <td><span class="warning">MONITORING</span></td>
+                </tr>
+
+                <tr>
+                    <td>SAT-003</td>
+                    <td>GEO</td>
+                    <td>35786 km</td>
+                    <td>3.1 km/s</td>
+                    <td>90%</td>
+                    <td><span class="safe">SAFE</span></td>
+                </tr>
+
+                <tr>
+                    <td>SAT-004</td>
+                    <td>LEO</td>
+                    <td>600 km</td>
+                    <td>7.8 km/s</td>
+                    <td>45%</td>
+                    <td><span class="danger">HIGH RISK</span></td>
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</section>
+
+<!-- ===================== SPACE DEBRIS TRACKING ===================== -->
+
+<section class="analytics" id="debris-table">
+
+    <h2>☄️ Space Debris Tracking</h2>
+    <div class="search-box">
+
+    <input type="text" placeholder="Search Satellite or Debris ID">
+
+    <button>🔍 Search</button>
 
 </div>
+
+
+    <div class="table-container">
+
+        <table class="status-table">
+
+            <thead>
+                <tr>
+                    <th>Debris ID</th>
+                    <th>Orbit</th>
+                    <th>Velocity</th>
+                    <th>Distance</th>
+                    <th>Risk</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                <tr>
+                    <td>DEB-4821</td>
+                    <td>LEO</td>
+                    <td>7.8 km/s</td>
+                    <td>12.5 km</td>
+                    <td class="danger">HIGH</td>
+                    <td>Tracking</td>
+                </tr>
+
+                <tr>
+                    <td>DEB-3015</td>
+                    <td>MEO</td>
+                    <td>5.1 km/s</td>
+                    <td>35 km</td>
+                    <td class="warning">MEDIUM</td>
+                    <td>Monitoring</td>
+                </tr>
+
+                <tr>
+                    <td>DEB-1982</td>
+                    <td>GEO</td>
+                    <td>3.0 km/s</td>
+                    <td>120 km</td>
+                    <td class="safe">LOW</td>
+                    <td>Safe</td>
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
 
 </section>
 

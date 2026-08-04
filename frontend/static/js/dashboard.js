@@ -8,41 +8,29 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const debrisChartCanvas = document.getElementById("debrisChart");
     let debrisChart;
+    alert(typeof Chart);
 
     if (debrisChartCanvas) {
 
         debrisChart = new Chart(debrisChartCanvas, {
-
-            type: "line",
-
-            data: {
-
-                labels: [
-                    "00:00",
-                    "04:00",
-                    "08:00",
-                    "12:00",
-                    "16:00",
-                    "20:00"
-                ],
-
-                datasets: [{
-
-                    label: "Tracked Debris Objects",
-
-                    data: [820, 950, 1100, 1180, 1250, 1320],
-
-                    borderWidth: 2,
-
-                    tension: 0.4,
-
-                    fill: false
-
-                }]
-
-            }
-
-        });
+    type: "line",
+    data: {
+        labels: ["00:00","04:00","08:00","12:00","16:00","20:00"],
+        datasets: [{
+            label: "Tracked Debris Objects",
+            data: [820,950,1100,1180,1250,1320],
+            borderColor: "#38bdf8",
+            backgroundColor: "rgba(56,189,248,0.1)",
+            borderWidth: 3,
+            fill: true,
+            tension: 0.4
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false
+    }
+});
 
     }
 
@@ -56,37 +44,24 @@ document.addEventListener("DOMContentLoaded", function () {
     if (riskChartCanvas) {
 
         riskChart = new Chart(riskChartCanvas, {
-
-            type: "line",
-
-            data: {
-
-                labels: [
-                    "Day 1",
-                    "Day 2",
-                    "Day 3",
-                    "Day 4",
-                    "Day 5",
-                    "Day 6"
-                ],
-
-                datasets: [{
-
-                    label: "Collision Risk %",
-
-                    data: [4, 6, 5, 8, 3, 2],
-
-                    borderWidth: 2,
-
-                    tension: 0.4,
-
-                    fill: false
-
-                }]
-
-            }
-
-        });
+    type: "line",
+    data: {
+        labels: ["Day 1","Day 2","Day 3","Day 4","Day 5","Day 6"],
+        datasets: [{
+            label: "Collision Risk %",
+            data: [4,6,5,8,3,2],
+            borderColor: "#38bdf8",
+            backgroundColor: "rgba(248, 56, 56, 0.24)",
+            borderWidth: 3,
+            fill: true,
+            tension: 0.4
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false
+    }
+});
 
     }
 
@@ -330,3 +305,111 @@ setInterval(updateDashboard, 5000);
 // Run clock immediately
 updateClock();   
 });
+// =============================
+// Search Function
+// =============================
+
+const searchInput = document.querySelector(".search-box input");
+const searchButton = document.querySelector(".search-box button");
+
+if (searchButton) {
+
+    searchButton.addEventListener("click", function () {
+
+        const value = searchInput.value.trim().toUpperCase();
+
+        if (value === "") {
+
+            alert("Please enter a Satellite ID or Debris ID.");
+
+        } else {
+
+            alert("Searching for: " + value);
+
+        }
+
+    });
+
+}
+// =============================
+// Simulation Controls
+// =============================
+
+let simulationRunning = false;
+let simulationInterval;
+
+const startBtn = document.querySelector(".start-btn");
+const pauseBtn = document.querySelector(".pause-btn");
+const resetBtn = document.querySelector(".reset-btn");
+console.log("Start Button:", startBtn);
+console.log("Pause Button:", pauseBtn);
+console.log("Reset Button:", resetBtn);
+
+if (startBtn) {
+
+    startBtn.addEventListener("click", () => {
+        console.log("start button clicked");
+
+        if (simulationRunning) return;
+
+        simulationRunning = true;
+        document.getElementById("simulation-status").innerText = "RUNNING";
+
+       simulationInterval = setInterval(() => {
+
+    let debrisValue = Math.floor(35000 + Math.random() * 500);
+
+    let riskValue = (Math.random() * 10).toFixed(2);
+
+
+    if(document.getElementById("debris-count"))
+        document.getElementById("debris-count").innerText = debrisValue;
+
+
+    if(document.getElementById("collision-risk"))
+        document.getElementById("collision-risk").innerText = riskValue + "%";
+
+
+    if(document.getElementById("objects-detected"))
+        document.getElementById("objects-detected").innerText =
+        Math.floor(Math.random() * 300 + 1200);
+
+
+    if(document.getElementById("collision-probability"))
+        document.getElementById("collision-probability").innerText =
+        riskValue + "%";
+
+
+}, 2000);
+
+    });
+
+}
+
+if (pauseBtn) {
+
+    pauseBtn.addEventListener("click", () => {
+
+        clearInterval(simulationInterval);
+        simulationRunning = false;
+        document.getElementById("simulation-status").innerText = "PAUSED";
+
+    });
+
+}
+
+if (resetBtn) {
+
+    resetBtn.addEventListener("click", () => {
+
+        clearInterval(simulationInterval);
+        simulationRunning = false;
+        document.getElementById("simulation-status").innerText = "READY";
+
+        document.getElementById("objects-detected").innerText = "1250";
+        document.getElementById("collision-probability").innerText = "2%";
+
+    });
+
+}
+
