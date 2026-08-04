@@ -413,3 +413,48 @@ if (resetBtn) {
 
 }
 
+// =============================
+// Number Counting Animation
+// =============================
+
+function animateNumbers() {
+
+    const numbers = document.querySelectorAll(".stat-number");
+
+    numbers.forEach(number => {
+
+        const value = number.innerText.replace(/,/g, "").replace("+","").replace("%","");
+const target = Number(value);
+
+        let count = 0;
+
+        const speed = target / 80;
+
+        function update(){
+
+            count += speed;
+
+            if(count < target){
+
+                number.innerText = Math.floor(count).toLocaleString();
+
+                requestAnimationFrame(update);
+
+            }
+            else{
+
+                number.innerText = target.toLocaleString();
+
+            }
+
+        }
+
+        update();
+
+    });
+
+}
+
+
+window.addEventListener("load", animateNumbers);
+
