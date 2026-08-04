@@ -3,6 +3,7 @@ import numpy as np
 
 from backend.explainable_ai import explain_collision
 from backend.reinforcement_agent import reinforcement_decision
+from backend.ai_model import predict_collision as ai_predict_collision
 from database.database import save_prediction
 from backend.logger import log_info, log_error
 
@@ -31,8 +32,10 @@ def predict_collision():
 
         ts = load.timescale()
 
+        current_time = ts.now()
+
         future_times = [
-            ts.now() + minutes / 1440
+            current_time + minutes / 1440
             for minutes in PREDICTION_INTERVALS
         ]
 
@@ -57,10 +60,20 @@ def predict_collision():
 
                     distance = calculate_distance(pos1, pos2)
 
-                    if distance < SAFE_DISTANCE:
-                        status = "Collision Risk"
-                    else:
-                        status = "Safe"
+                    # Temporary orbital velocity value
+                    relative_velocity = 7.8
+
+                    time_to_closest = (
+                        t.utc_datetime() - current_time.utc_datetime()
+                    ).total_seconds() / 60
+
+                    ai_result = ai_predict_collision(
+                        distance_km=round(float(distance), 2),
+                        relative_velocity_kms=relative_velocity,
+                        time_to_closest_min=max(1, round(time_to_closest, 2))
+                    )
+
+                    status = ai_result["prediction"]
 
                     explanation = explain_collision(
                         round(float(distance), 2),
@@ -84,6 +97,7 @@ def predict_collision():
                     print("-" * 40)
                     print("Time :", t.utc_strftime("%H:%M:%S"))
                     print("Distance :", round(float(distance), 2), "km")
+                    print("Relative Velocity :", relative_velocity, "km/s")
                     print("Status :", status)
                     print("Explanation :", explanation)
                     print("Recommended Maneuver :", maneuver)
@@ -97,6 +111,7 @@ def predict_collision():
                     results.append({
                         "time": t.utc_strftime("%H:%M:%S"),
                         "distance_km": round(float(distance), 2),
+                        "relative_velocity_kms": relative_velocity,
                         "status": status,
                         "explanation": explanation,
                         "recommended_maneuver": maneuver
