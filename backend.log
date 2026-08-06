@@ -62,3 +62,131 @@
 2026-08-01 18:10:10,698 - INFO - TEMPSAT 1 - CALSPHERE 4A | Distance: 2838.91 km | Status: Safe
 2026-08-01 18:10:10,709 - INFO - TEMPSAT 1 - CALSPHERE 4A | Distance: 1968.0 km | Status: Safe
 2026-08-01 18:10:10,710 - INFO - Collision prediction completed successfully.
+2026-08-04 22:44:35,023 - INFO - Collision prediction started.
+2026-08-04 22:44:36,325 - INFO - CALSPHERE 1 - CALSPHERE 2 | Distance: 12376.49 km | Status: Safe Orbit
+2026-08-04 22:44:36,389 - INFO - CALSPHERE 1 - CALSPHERE 2 | Distance: 12354.67 km | Status: Safe Orbit
+2026-08-04 22:44:36,457 - INFO - CALSPHERE 1 - CALSPHERE 2 | Distance: 12329.83 km | Status: Safe Orbit
+2026-08-04 22:44:36,529 - INFO - CALSPHERE 1 - LCS 1 | Distance: 14160.94 km | Status: Safe Orbit
+2026-08-04 22:44:36,585 - INFO - CALSPHERE 1 - LCS 1 | Distance: 13990.99 km | Status: Safe Orbit
+2026-08-04 22:44:36,642 - INFO - CALSPHERE 1 - LCS 1 | Distance: 14085.5 km | Status: Safe Orbit
+2026-08-04 22:44:36,711 - INFO - CALSPHERE 1 - TEMPSAT 1 | Distance: 12977.36 km | Status: Safe Orbit
+2026-08-04 22:44:36,775 - INFO - CALSPHERE 1 - TEMPSAT 1 | Distance: 14473.09 km | Status: Safe Orbit
+2026-08-04 22:44:36,837 - INFO - CALSPHERE 1 - TEMPSAT 1 | Distance: 14894.02 km | Status: Safe Orbit
+2026-08-04 22:44:36,912 - INFO - CALSPHERE 1 - CALSPHERE 4A | Distance: 13461.22 km | Status: Safe Orbit
+2026-08-04 22:44:37,003 - INFO - CALSPHERE 1 - CALSPHERE 4A | Distance: 13457.94 km | Status: Safe Orbit
+2026-08-04 22:44:37,222 - INFO - CALSPHERE 1 - CALSPHERE 4A | Distance: 13227.2 km | Status: Safe Orbit
+2026-08-04 22:44:37,457 - INFO - CALSPHERE 2 - LCS 1 | Distance: 11701.41 km | Status: Safe Orbit
+2026-08-04 22:44:37,541 - INFO - CALSPHERE 2 - LCS 1 | Distance: 12045.23 km | Status: Safe Orbit
+2026-08-04 22:44:37,623 - INFO - CALSPHERE 2 - LCS 1 | Distance: 12395.75 km | Status: Safe Orbit
+2026-08-04 22:44:37,694 - INFO - CALSPHERE 2 - TEMPSAT 1 | Distance: 12983.62 km | Status: Safe Orbit
+2026-08-04 22:44:37,753 - INFO - CALSPHERE 2 - TEMPSAT 1 | Distance: 10848.32 km | Status: Safe Orbit
+2026-08-04 22:44:37,818 - INFO - CALSPHERE 2 - TEMPSAT 1 | Distance: 7955.91 km | Status: Safe Orbit
+2026-08-04 22:44:37,883 - INFO - CALSPHERE 2 - CALSPHERE 4A | Distance: 12523.17 km | Status: Safe Orbit
+2026-08-04 22:44:37,942 - INFO - CALSPHERE 2 - CALSPHERE 4A | Distance: 12170.75 km | Status: Safe Orbit
+2026-08-04 22:44:37,994 - INFO - CALSPHERE 2 - CALSPHERE 4A | Distance: 11967.29 km | Status: Safe Orbit
+2026-08-04 22:44:38,066 - INFO - LCS 1 - TEMPSAT 1 | Distance: 6598.91 km | Status: Safe Orbit
+2026-08-04 22:44:38,122 - INFO - LCS 1 - TEMPSAT 1 | Distance: 7326.81 km | Status: Safe Orbit
+2026-08-04 22:44:38,179 - INFO - LCS 1 - TEMPSAT 1 | Distance: 9322.58 km | Status: Safe Orbit
+2026-08-04 22:44:38,236 - INFO - LCS 1 - CALSPHERE 4A | Distance: 10107.8 km | Status: Safe Orbit
+2026-08-04 22:44:38,295 - INFO - LCS 1 - CALSPHERE 4A | Distance: 11291.69 km | Status: Safe Orbit
+2026-08-04 22:44:38,347 - INFO - LCS 1 - CALSPHERE 4A | Distance: 11964.45 km | Status: Safe Orbit
+2026-08-04 22:44:38,418 - INFO - TEMPSAT 1 - CALSPHERE 4A | Distance: 4342.6 km | Status: Safe Orbit
+2026-08-04 22:44:38,476 - INFO - TEMPSAT 1 - CALSPHERE 4A | Distance: 4863.96 km | Status: Safe Orbit
+2026-08-04 22:44:38,521 - INFO - TEMPSAT 1 - CALSPHERE 4A | Distance: 6749.38 km | Status: Safe Orbit
+2026-08-04 22:44:38,521 - INFO - Collision prediction completed successfully.
+2026-08-04 23:27:41,707 - INFO - Collision prediction started.
+2026-08-04 23:27:42,760 - INFO - CALSPHERE 1 - CALSPHERE 2 | Distance: 12110.44 km | Relative Velocity: 12.03 km/s | Status: Collision Risk
+2026-08-04 23:27:42,827 - INFO - CALSPHERE 1 - CALSPHERE 2 | Distance: 12084.61 km | Relative Velocity: 12.0 km/s | Status: Collision Risk
+2026-08-04 23:27:42,895 - INFO - CALSPHERE 1 - CALSPHERE 2 | Distance: 12064.31 km | Relative Velocity: 11.98 km/s | Status: Safe Orbit
+2026-08-04 23:27:43,023 - INFO - CALSPHERE 1 - LCS 1 | Distance: 16378.13 km | Relative Velocity: 12.25 km/s | Status: Collision Risk
+2026-08-04 23:27:43,109 - INFO - CALSPHERE 1 - LCS 1 | Distance: 15997.86 km | Relative Velocity: 12.52 km/s | Status: Collision Risk
+2026-08-04 23:27:43,166 - INFO - CALSPHERE 1 - LCS 1 | Distance: 15435.93 km | Relative Velocity: 12.89 km/s | Status: Safe Orbit
+2026-08-04 23:27:43,218 - INFO - CALSPHERE 1 - TEMPSAT 1 | Distance: 7640.6 km | Relative Velocity: 13.53 km/s | Status: Collision Risk
+2026-08-04 23:27:43,282 - INFO - CALSPHERE 1 - TEMPSAT 1 | Distance: 10470.51 km | Relative Velocity: 11.54 km/s | Status: Collision Risk
+2026-08-04 23:27:43,338 - INFO - CALSPHERE 1 - TEMPSAT 1 | Distance: 12863.64 km | Relative Velocity: 8.87 km/s | Status: Safe Orbit
+2026-08-04 23:27:43,402 - INFO - CALSPHERE 1 - CALSPHERE 4A | Distance: 13095.16 km | Relative Velocity: 12.71 km/s | Status: Collision Risk
+2026-08-04 23:27:43,466 - INFO - CALSPHERE 1 - CALSPHERE 4A | Distance: 13517.41 km | Relative Velocity: 12.33 km/s | Status: Collision Risk
+2026-08-04 23:27:43,578 - INFO - CALSPHERE 1 - CALSPHERE 4A | Distance: 13770.94 km | Relative Velocity: 12.11 km/s | Status: Safe Orbit
+2026-08-04 23:27:43,690 - INFO - CALSPHERE 2 - LCS 1 | Distance: 8185.05 km | Relative Velocity: 8.71 km/s | Status: Safe Orbit
+2026-08-04 23:27:43,793 - INFO - CALSPHERE 2 - LCS 1 | Distance: 7096.82 km | Relative Velocity: 8.83 km/s | Status: Safe Orbit
+2026-08-04 23:27:43,889 - INFO - CALSPHERE 2 - LCS 1 | Distance: 6481.36 km | Relative Velocity: 8.64 km/s | Status: Safe Orbit
+2026-08-04 23:27:43,999 - INFO - CALSPHERE 2 - TEMPSAT 1 | Distance: 13970.21 km | Relative Velocity: 4.03 km/s | Status: Safe Orbit
+2026-08-04 23:27:44,097 - INFO - CALSPHERE 2 - TEMPSAT 1 | Distance: 14133.56 km | Relative Velocity: 3.44 km/s | Status: Safe Orbit
+2026-08-04 23:27:44,188 - INFO - CALSPHERE 2 - TEMPSAT 1 | Distance: 13153.64 km | Relative Velocity: 6.11 km/s | Status: Safe Orbit
+2026-08-04 23:27:44,286 - INFO - CALSPHERE 2 - CALSPHERE 4A | Distance: 13225.29 km | Relative Velocity: 11.74 km/s | Status: Collision Risk
+2026-08-04 23:27:44,424 - INFO - CALSPHERE 2 - CALSPHERE 4A | Distance: 12966.46 km | Relative Velocity: 11.98 km/s | Status: Collision Risk
+2026-08-04 23:27:44,517 - INFO - CALSPHERE 2 - CALSPHERE 4A | Distance: 12591.88 km | Relative Velocity: 12.33 km/s | Status: Safe Orbit
+2026-08-04 23:27:44,604 - INFO - LCS 1 - TEMPSAT 1 | Distance: 14491.37 km | Relative Velocity: 9.06 km/s | Status: Safe Orbit
+2026-08-04 23:27:44,690 - INFO - LCS 1 - TEMPSAT 1 | Distance: 12740.74 km | Relative Velocity: 10.88 km/s | Status: Collision Risk
+2026-08-04 23:27:44,779 - INFO - LCS 1 - TEMPSAT 1 | Distance: 10751.51 km | Relative Velocity: 12.4 km/s | Status: Safe Orbit
+2026-08-04 23:27:44,903 - INFO - LCS 1 - CALSPHERE 4A | Distance: 9271.61 km | Relative Velocity: 11.34 km/s | Status: Collision Risk
+2026-08-04 23:27:45,003 - INFO - LCS 1 - CALSPHERE 4A | Distance: 10043.75 km | Relative Velocity: 11.27 km/s | Status: Collision Risk
+2026-08-04 23:27:45,294 - INFO - LCS 1 - CALSPHERE 4A | Distance: 11237.86 km | Relative Velocity: 10.88 km/s | Status: Safe Orbit
+2026-08-04 23:27:45,398 - INFO - TEMPSAT 1 - CALSPHERE 4A | Distance: 8309.5 km | Relative Velocity: 8.96 km/s | Status: Safe Orbit
+2026-08-04 23:27:45,517 - INFO - TEMPSAT 1 - CALSPHERE 4A | Distance: 6274.62 km | Relative Velocity: 10.4 km/s | Status: Collision Risk
+2026-08-04 23:27:45,609 - INFO - TEMPSAT 1 - CALSPHERE 4A | Distance: 4704.92 km | Relative Velocity: 11.14 km/s | Status: Safe Orbit
+2026-08-04 23:27:45,610 - INFO - Collision prediction completed successfully.
+2026-08-04 23:28:05,556 - INFO - Collision prediction started.
+2026-08-04 23:28:06,382 - INFO - CALSPHERE 1 - CALSPHERE 2 | Distance: 12108.2 km | Relative Velocity: 12.02 km/s | Status: Collision Risk
+2026-08-04 23:28:06,448 - INFO - CALSPHERE 1 - CALSPHERE 2 | Distance: 12082.81 km | Relative Velocity: 12.0 km/s | Status: Collision Risk
+2026-08-04 23:28:06,502 - INFO - CALSPHERE 1 - CALSPHERE 2 | Distance: 12062.93 km | Relative Velocity: 11.98 km/s | Status: Safe Orbit
+2026-08-04 23:28:06,554 - INFO - CALSPHERE 1 - LCS 1 | Distance: 16356.82 km | Relative Velocity: 12.27 km/s | Status: Collision Risk
+2026-08-04 23:28:06,614 - INFO - CALSPHERE 1 - LCS 1 | Distance: 15958.86 km | Relative Velocity: 12.55 km/s | Status: Collision Risk
+2026-08-04 23:28:06,673 - INFO - CALSPHERE 1 - LCS 1 | Distance: 15387.17 km | Relative Velocity: 12.92 km/s | Status: Safe Orbit
+2026-08-04 23:28:06,725 - INFO - CALSPHERE 1 - TEMPSAT 1 | Distance: 7862.01 km | Relative Velocity: 13.41 km/s | Status: Collision Risk
+2026-08-04 23:28:06,775 - INFO - CALSPHERE 1 - TEMPSAT 1 | Distance: 10682.84 km | Relative Velocity: 11.35 km/s | Status: Collision Risk
+2026-08-04 23:28:06,825 - INFO - CALSPHERE 1 - TEMPSAT 1 | Distance: 13018.86 km | Relative Velocity: 8.64 km/s | Status: Safe Orbit
+2026-08-04 23:28:06,880 - INFO - CALSPHERE 1 - CALSPHERE 4A | Distance: 13132.06 km | Relative Velocity: 12.68 km/s | Status: Collision Risk
+2026-08-04 23:28:06,931 - INFO - CALSPHERE 1 - CALSPHERE 4A | Distance: 13544.74 km | Relative Velocity: 12.31 km/s | Status: Collision Risk
+2026-08-04 23:28:06,990 - INFO - CALSPHERE 1 - CALSPHERE 4A | Distance: 13781.46 km | Relative Velocity: 12.1 km/s | Status: Safe Orbit
+2026-08-04 23:28:07,045 - INFO - CALSPHERE 2 - LCS 1 | Distance: 8089.02 km | Relative Velocity: 8.73 km/s | Status: Safe Orbit
+2026-08-04 23:28:07,103 - INFO - CALSPHERE 2 - LCS 1 | Distance: 7027.46 km | Relative Velocity: 8.83 km/s | Status: Safe Orbit
+2026-08-04 23:28:07,191 - INFO - CALSPHERE 2 - LCS 1 | Distance: 6459.99 km | Relative Velocity: 8.61 km/s | Status: Safe Orbit
+2026-08-04 23:28:07,253 - INFO - CALSPHERE 2 - TEMPSAT 1 | Distance: 14024.8 km | Relative Velocity: 3.85 km/s | Status: Safe Orbit
+2026-08-04 23:28:07,300 - INFO - CALSPHERE 2 - TEMPSAT 1 | Distance: 14097.33 km | Relative Velocity: 3.58 km/s | Status: Safe Orbit
+2026-08-04 23:28:07,352 - INFO - CALSPHERE 2 - TEMPSAT 1 | Distance: 13029.78 km | Relative Velocity: 6.36 km/s | Status: Safe Orbit
+2026-08-04 23:28:07,417 - INFO - CALSPHERE 2 - CALSPHERE 4A | Distance: 13211.18 km | Relative Velocity: 11.75 km/s | Status: Collision Risk
+2026-08-04 23:28:07,478 - INFO - CALSPHERE 2 - CALSPHERE 4A | Distance: 12939.81 km | Relative Velocity: 12.01 km/s | Status: Collision Risk
+2026-08-04 23:28:07,536 - INFO - CALSPHERE 2 - CALSPHERE 4A | Distance: 12560.68 km | Relative Velocity: 12.36 km/s | Status: Safe Orbit
+2026-08-04 23:28:07,598 - INFO - LCS 1 - TEMPSAT 1 | Distance: 14370.41 km | Relative Velocity: 9.2 km/s | Status: Safe Orbit
+2026-08-04 23:28:07,654 - INFO - LCS 1 - TEMPSAT 1 | Distance: 12587.25 km | Relative Velocity: 11.01 km/s | Status: Collision Risk
+2026-08-04 23:28:07,711 - INFO - LCS 1 - TEMPSAT 1 | Distance: 10598.49 km | Relative Velocity: 12.5 km/s | Status: Safe Orbit
+2026-08-04 23:28:07,764 - INFO - LCS 1 - CALSPHERE 4A | Distance: 9310.65 km | Relative Velocity: 11.35 km/s | Status: Collision Risk
+2026-08-04 23:28:07,821 - INFO - LCS 1 - CALSPHERE 4A | Distance: 10126.54 km | Relative Velocity: 11.25 km/s | Status: Collision Risk
+2026-08-04 23:28:07,869 - INFO - LCS 1 - CALSPHERE 4A | Distance: 11340.74 km | Relative Velocity: 10.84 km/s | Status: Safe Orbit
+2026-08-04 23:28:07,930 - INFO - TEMPSAT 1 - CALSPHERE 4A | Distance: 8152.81 km | Relative Velocity: 9.1 km/s | Status: Safe Orbit
+2026-08-04 23:28:07,981 - INFO - TEMPSAT 1 - CALSPHERE 4A | Distance: 6119.99 km | Relative Velocity: 10.48 km/s | Status: Collision Risk
+2026-08-04 23:28:08,028 - INFO - TEMPSAT 1 - CALSPHERE 4A | Distance: 4637.99 km | Relative Velocity: 11.17 km/s | Status: Safe Orbit
+2026-08-04 23:28:08,029 - INFO - Collision prediction completed successfully.
+2026-08-06 13:20:32,628 - INFO - Collision prediction started.
+2026-08-06 13:20:33,537 - INFO - CALSPHERE 1 - CALSPHERE 2 | Distance: 3099.81 km | Relative Velocity: 3.14 km/s | Status: Safe Orbit
+2026-08-06 13:20:33,591 - INFO - CALSPHERE 1 - CALSPHERE 2 | Distance: 3141.75 km | Relative Velocity: 3.17 km/s | Status: Safe Orbit
+2026-08-06 13:20:33,645 - INFO - CALSPHERE 1 - CALSPHERE 2 | Distance: 3192.07 km | Relative Velocity: 3.2 km/s | Status: Safe Orbit
+2026-08-06 13:20:33,706 - INFO - CALSPHERE 1 - LCS 1 | Distance: 13738.41 km | Relative Velocity: 13.19 km/s | Status: Safe Orbit
+2026-08-06 13:20:33,769 - INFO - CALSPHERE 1 - LCS 1 | Distance: 13299.81 km | Relative Velocity: 13.19 km/s | Status: Safe Orbit
+2026-08-06 13:20:33,826 - INFO - CALSPHERE 1 - LCS 1 | Distance: 13158.14 km | Relative Velocity: 12.95 km/s | Status: Safe Orbit
+2026-08-06 13:20:33,877 - INFO - CALSPHERE 1 - TEMPSAT 1 | Distance: 5656.79 km | Relative Velocity: 13.19 km/s | Status: Safe Orbit
+2026-08-06 13:20:33,930 - INFO - CALSPHERE 1 - TEMPSAT 1 | Distance: 2910.71 km | Relative Velocity: 14.04 km/s | Status: Safe Orbit
+2026-08-06 13:20:34,008 - INFO - CALSPHERE 1 - TEMPSAT 1 | Distance: 4237.06 km | Relative Velocity: 13.71 km/s | Status: Safe Orbit
+2026-08-06 13:20:34,093 - INFO - CALSPHERE 1 - CALSPHERE 4A | Distance: 1291.29 km | Relative Velocity: 5.95 km/s | Status: Safe Orbit
+2026-08-06 13:20:34,139 - INFO - CALSPHERE 1 - CALSPHERE 4A | Distance: 2976.55 km | Relative Velocity: 5.33 km/s | Status: Safe Orbit
+2026-08-06 13:20:34,187 - INFO - CALSPHERE 1 - CALSPHERE 4A | Distance: 4421.29 km | Relative Velocity: 4.25 km/s | Status: Safe Orbit
+2026-08-06 13:20:34,237 - INFO - CALSPHERE 2 - LCS 1 | Distance: 14914.03 km | Relative Velocity: 13.27 km/s | Status: Safe Orbit
+2026-08-06 13:20:34,296 - INFO - CALSPHERE 2 - LCS 1 | Distance: 14351.52 km | Relative Velocity: 13.56 km/s | Status: Safe Orbit
+2026-08-06 13:20:34,352 - INFO - CALSPHERE 2 - LCS 1 | Distance: 13997.3 km | Relative Velocity: 13.64 km/s | Status: Safe Orbit
+2026-08-06 13:20:34,409 - INFO - CALSPHERE 2 - TEMPSAT 1 | Distance: 7759.07 km | Relative Velocity: 11.56 km/s | Status: Safe Orbit
+2026-08-06 13:20:34,465 - INFO - CALSPHERE 2 - TEMPSAT 1 | Distance: 4289.34 km | Relative Velocity: 13.19 km/s | Status: Safe Orbit
+2026-08-06 13:20:34,520 - INFO - CALSPHERE 2 - TEMPSAT 1 | Distance: 1980.81 km | Relative Velocity: 13.71 km/s | Status: Safe Orbit
+2026-08-06 13:20:34,572 - INFO - CALSPHERE 2 - CALSPHERE 4A | Distance: 3078.05 km | Relative Velocity: 6.32 km/s | Status: Safe Orbit
+2026-08-06 13:20:34,627 - INFO - CALSPHERE 2 - CALSPHERE 4A | Distance: 3429.61 km | Relative Velocity: 6.1 km/s | Status: Safe Orbit
+2026-08-06 13:20:34,679 - INFO - CALSPHERE 2 - CALSPHERE 4A | Distance: 4315.43 km | Relative Velocity: 5.5 km/s | Status: Safe Orbit
+2026-08-06 13:20:34,742 - INFO - LCS 1 - TEMPSAT 1 | Distance: 13580.95 km | Relative Velocity: 7.34 km/s | Status: Safe Orbit
+2026-08-06 13:20:34,789 - INFO - LCS 1 - TEMPSAT 1 | Distance: 14735.43 km | Relative Velocity: 5.21 km/s | Status: Safe Orbit
+2026-08-06 13:20:34,838 - INFO - LCS 1 - TEMPSAT 1 | Distance: 15083.76 km | Relative Velocity: 4.03 km/s | Status: Safe Orbit
+2026-08-06 13:20:34,895 - INFO - LCS 1 - CALSPHERE 4A | Distance: 13457.2 km | Relative Velocity: 10.31 km/s | Status: Safe Orbit
+2026-08-06 13:20:34,943 - INFO - LCS 1 - CALSPHERE 4A | Distance: 12204.17 km | Relative Velocity: 10.97 km/s | Status: Safe Orbit
+2026-08-06 13:20:35,005 - INFO - LCS 1 - CALSPHERE 4A | Distance: 10952.26 km | Relative Velocity: 11.49 km/s | Status: Safe Orbit
+2026-08-06 13:20:35,062 - INFO - TEMPSAT 1 - CALSPHERE 4A | Distance: 6799.01 km | Relative Velocity: 11.18 km/s | Status: Safe Orbit
+2026-08-06 13:20:35,111 - INFO - TEMPSAT 1 - CALSPHERE 4A | Distance: 5748.62 km | Relative Velocity: 11.71 km/s | Status: Safe Orbit
+2026-08-06 13:20:35,159 - INFO - TEMPSAT 1 - CALSPHERE 4A | Distance: 6198.48 km | Relative Velocity: 11.47 km/s | Status: Safe Orbit
+2026-08-06 13:20:35,159 - INFO - Collision prediction completed successfully.

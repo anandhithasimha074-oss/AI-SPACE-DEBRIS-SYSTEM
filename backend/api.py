@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from skyfield.api import load
 
 from backend.collision_predictor import predict_collision
@@ -46,38 +46,43 @@ def health():
 
 @app.get("/predict")
 def predict():
-    return predict_collision()
+    try:
+        return predict_collision()
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
 
 @app.get("/ai-predict")
 def ai_predict():
-    """
-    AI-based collision prediction using the trained Random Forest model.
-    Sample values are used for testing.
-    """
-    result = ai_predict_collision(
-        distance_km=25,
-        relative_velocity_kms=7.8,
-        time_to_closest_min=6
-    )
-
-    return result
+    try:
+        return ai_predict_collision(
+            distance_km=25,
+            relative_velocity_kms=7.8,
+            time_to_closest_min=6
+        )
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
 
 @app.get("/digital-twin")
 def digital_twin():
+    try:
+        satellites = load.tle_file(CELESTRAK_URL)
 
-    satellites = load.tle_file(CELESTRAK_URL)
+        twin = DigitalTwin(satellites[0])
+        twin.update()
 
-    twin = DigitalTwin(satellites[0])
+        return twin.get_state()
 
-    twin.update()
-
-    return twin.get_state()
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
 
 @app.get("/history")
 def history():
-    return {
-        "prediction_history": get_prediction_history()
-    }
+    try:
+        return {
+            "prediction_history": get_prediction_history()
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
