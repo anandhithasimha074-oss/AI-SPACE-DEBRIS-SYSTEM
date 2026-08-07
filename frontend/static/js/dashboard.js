@@ -457,4 +457,115 @@ const target = Number(value);
 
 
 window.addEventListener("load", animateNumbers);
+// =============================
+// Backend API Integration
+// =============================
 
+// =============================
+// Backend API Integration
+// =============================
+
+async function loadSystemStatus() {
+
+    try {
+
+        const response = await fetch("http://127.0.0.1:8000/status");
+
+        if (!response.ok) {
+            throw new Error("Failed to fetch system status");
+        }
+
+        const data = await response.json();
+
+        const systemStatus = document.getElementById("system-status");
+        if (systemStatus) systemStatus.textContent = data.system;
+
+        const aiModel = document.getElementById("ai-model-status");
+        if (aiModel) aiModel.textContent = data.collision_detection;
+
+        const monitor = document.getElementById("monitor-status");
+        if (monitor) monitor.textContent = data.digital_twin;
+
+        const connection = document.getElementById("connection-status");
+        if (connection) connection.textContent = data.reinforcement_learning;
+
+        console.log("Backend Connected:", data);
+
+    } catch (error) {
+
+        console.error("Status API Error:", error);
+
+    }
+
+}
+
+loadSystemStatus();
+setInterval(loadSystemStatus, 5000);
+// =============================
+// Collision Prediction API
+// =============================
+
+async function loadPrediction() {
+
+    try {
+
+        const response = await fetch("http://127.0.0.1:8000/predict");
+
+        if (!response.ok) {
+            throw new Error("Prediction API failed");
+        }
+
+        const data = await response.json();
+
+        if (data.length > 0) {
+
+            const prediction = data[0].predictions[0];
+
+            // Existing Dashboard Updates
+            const nearestObject = document.getElementById("nearest-object");
+            if (nearestObject)
+                nearestObject.textContent = data[0].satellite_2;
+
+            const probability = document.getElementById("mission-probability");
+            if (probability)
+                probability.textContent = prediction.confidence + "%";
+
+            const risk = document.getElementById("mission-risk");
+            if (risk)
+                risk.textContent = prediction.status;
+
+            const approach = document.getElementById("closest-approach");
+            if (approach)
+                approach.textContent = prediction.distance_km + " km";
+
+            // New Collision Prediction Card Updates
+            const predictionStatus = document.getElementById("prediction-status");
+            if (predictionStatus)
+                predictionStatus.textContent = prediction.status;
+
+            const predictionDistance = document.getElementById("prediction-distance");
+            if (predictionDistance)
+                predictionDistance.textContent = prediction.distance_km + " km";
+
+            const predictionVelocity = document.getElementById("prediction-velocity");
+            if (predictionVelocity)
+                predictionVelocity.textContent = prediction.relative_velocity_kms + " km/s";
+
+            const predictionConfidence = document.getElementById("prediction-confidence");
+            if (predictionConfidence)
+                predictionConfidence.textContent = prediction.confidence + "%";
+
+            console.log("Prediction Loaded:", prediction);
+
+        }
+
+    } catch (error) {
+
+        console.error("Prediction API Error:", error);
+
+    }
+
+}
+
+loadPrediction();
+setInterval(loadPrediction, 5000);

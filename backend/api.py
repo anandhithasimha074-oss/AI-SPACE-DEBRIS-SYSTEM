@@ -1,4 +1,5 @@
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from skyfield.api import load
 
 from backend.collision_predictor import predict_collision
@@ -14,6 +15,18 @@ from backend.config import (
 app = FastAPI(
     title=API_TITLE,
     version=API_VERSION
+)
+
+# Enable CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+    "http://127.0.0.1:5000",
+    "http://localhost:5000",
+],  
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 
