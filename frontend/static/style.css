@@ -126,12 +126,28 @@ body {
 
 
 .earth {
-
     position: absolute;
-    top: 130px;
-    left: 130px;
-    font-size: 70px;
+    top: 95px;
+    left: 95px;
+    width: 160px;
+    height: 160px;
+}
+.earth img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+    animation: earthRotate 20s linear infinite;
+}
 
+@keyframes earthRotate {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 
@@ -1403,4 +1419,238 @@ h2 {
 
     transform:translateY(-6px);
 
-}                                                                                          
+}                    
+ /* ================================= */
+/* ENHANCED DIGITAL TWIN EARTH       */
+/* ================================= */
+
+.space-map {
+    position: relative;
+    width: 420px;
+    height: 420px;
+    margin: 35px auto;
+    border-radius: 50%;
+    border: 1px solid rgba(56,189,248,0.25);
+    background:
+        radial-gradient(circle at center,
+        rgba(30,64,175,0.25),
+        rgba(2,6,23,0.95) 65%);
+    box-shadow:
+        0 0 40px rgba(30,64,175,0.35),
+        inset 0 0 50px rgba(0,0,0,0.8);
+    overflow: hidden;
+}
+
+
+/* ================================= */
+/* EARTH                              */
+/* ================================= */
+
+.earth {
+    position: absolute;
+    top: 130px;
+    left: 130px;
+    width: 160px;
+    height: 160px;
+    z-index: 5;
+    border-radius: 50%;
+    overflow: hidden;
+
+    box-shadow:
+        0 0 15px rgba(56,189,248,0.8),
+        0 0 35px rgba(14,165,233,0.45),
+        inset -20px -15px 30px rgba(0,0,0,0.55);
+
+    animation: earthFloat 5s ease-in-out infinite;
+}
+
+.earth img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+
+    animation: earthRotate 20s linear infinite;
+}
+
+
+/* Earth rotation */
+
+@keyframes earthRotate {
+
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+
+}
+
+
+/* Slight floating effect */
+
+@keyframes earthFloat {
+
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-5px);
+    }
+
+}
+
+
+/* ================================= */
+/* ORBIT RINGS                        */
+/* ================================= */
+
+.orbit-ring {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    border: 1px solid rgba(56,189,248,0.55);
+
+    border-radius: 50%;
+
+    transform: translate(-50%, -50%);
+
+    pointer-events: none;
+}
+
+
+/* Inner orbit */
+
+.orbit-ring-1 {
+
+    width: 220px;
+    height: 100px;
+
+    transform:
+        translate(-50%, -50%)
+        rotate(20deg);
+
+}
+
+
+/* Middle orbit */
+
+.orbit-ring-2 {
+
+    width: 300px;
+    height: 150px;
+
+    transform:
+        translate(-50%, -50%)
+        rotate(-25deg);
+
+    border-color: rgba(125,211,252,0.35);
+
+}
+
+
+/* Outer orbit */
+
+.orbit-ring-3 {
+
+    width: 380px;
+    height: 190px;
+
+    transform:
+        translate(-50%, -50%)
+        rotate(15deg);
+
+    border-color: rgba(56,189,248,0.25);
+
+}
+
+
+/* ================================= */
+/* SATELLITE                         */
+/* ================================= */
+
+.satellite {
+
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    margin-left: -18px;
+    margin-top: -18px;
+
+    font-size: 32px;
+
+    z-index: 10;
+
+    animation:
+        satelliteOrbit 8s linear infinite;
+
+}
+
+
+/* Satellite orbit */
+
+@keyframes satelliteOrbit {
+
+    from {
+
+        transform:
+            rotate(0deg)
+            translateX(150px)
+            rotate(0deg);
+
+    }
+
+    to {
+
+        transform:
+            rotate(360deg)
+            translateX(150px)
+            rotate(-360deg);
+
+    }
+
+}
+
+
+/* ================================= */
+/* DEBRIS                             */
+/* ================================= */
+
+.debris {
+
+    position: absolute;
+
+    font-size: 20px;
+
+    color: #7dd3fc;
+
+    text-shadow:
+        0 0 8px #38bdf8,
+        0 0 15px #38bdf8;
+
+    z-index: 8;
+
+    animation: debrisFloat 3s ease-in-out infinite;
+
+}
+
+
+@keyframes debrisFloat {
+
+    0%, 100% {
+        opacity: 0.5;
+        transform: scale(0.8);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.2);
+    }
+
+}                                                                     
