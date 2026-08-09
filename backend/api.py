@@ -6,6 +6,7 @@ from backend.collision_predictor import predict_collision
 from backend.ai_model import predict_collision as ai_predict_collision
 from digital_twin.twin import DigitalTwin
 from database.database import get_prediction_history
+from backend.reinforcement_agent import reinforcement_decision
 from backend.config import (
     API_TITLE,
     API_VERSION,
@@ -60,7 +61,28 @@ def health():
 @app.get("/predict")
 def predict():
     try:
-        return predict_collision()
+
+        predictions = predict_collision()
+
+        for item in predictions:
+
+            for prediction in item.get("predictions", []):
+
+                distance = prediction.get("distance_km", 999999)
+                risk_status = prediction.get("status", "Safe Orbit")
+
+                rl_decision = reinforcement_decision(
+                    risk_status,
+                    distance
+                )
+
+                prediction["recommended_action"] = rl_decision["recommended_action"]
+                prediction["priority"] = rl_decision["priority"]
+                prediction["fuel_consumption"] = rl_decision["fuel_consumption"]
+                prediction["reason"] = rl_decision["reason"]
+
+        return predictions
+
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 

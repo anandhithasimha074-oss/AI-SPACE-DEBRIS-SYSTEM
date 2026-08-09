@@ -520,6 +520,45 @@ async function loadPrediction() {
         if (data.length > 0) {
 
             const prediction = data[0].predictions[0];
+            // =============================
+// Reinforcement Learning Data
+// =============================
+
+            const action = document.getElementById("monitoring-status");
+            const priority = document.getElementById("threat-level");
+            const fuel = document.getElementById("fuel-consumption");
+            const reason = document.getElementById("maneuver-reason");
+
+            if (action)
+                action.textContent = prediction.recommended_action;
+
+            if (priority)
+                priority.textContent = prediction.priority;
+
+            if (fuel)
+                fuel.textContent = prediction.fuel_consumption;
+
+            if (reason)
+                reason.textContent = prediction.reason;
+            // Satellite Protection
+            const satelliteStatus = document.getElementById("satellite-status");
+            const threatLevel = document.getElementById("threat-level");
+            const monitoringStatus = document.getElementById("monitoring-status");
+
+            if (satelliteStatus) {
+                satelliteStatus.textContent =
+                   prediction.recommended_action === "No Maneuver"
+            ? "Protected"
+            : "Action Required";
+            }
+
+            if (threatLevel) {
+                threatLevel.textContent = prediction.priority;
+            }
+
+            if (monitoringStatus) {
+                monitoringStatus.textContent = prediction.recommended_action;
+            }
 
             // Existing Dashboard Updates
             const nearestObject = document.getElementById("nearest-object");
@@ -569,3 +608,68 @@ async function loadPrediction() {
 
 loadPrediction();
 setInterval(loadPrediction, 5000);
+
+// =============================
+// Digital Twin API Integration
+// =============================
+
+async function loadDigitalTwin() {
+
+    try {
+
+        const response = await fetch("http://127.0.0.1:8000/digital-twin");
+
+        if (!response.ok) {
+            throw new Error("Digital Twin API failed");
+        }
+
+        const data = await response.json();
+
+        console.log("Digital Twin Data:", data);
+
+        // Latitude
+        const latitude = document.getElementById("digital-twin-latitude");
+
+        if (latitude && data.latitude !== undefined) {
+            latitude.textContent = data.latitude.toFixed(4) + "°";
+        }
+
+        // Longitude
+        const longitude = document.getElementById("digital-twin-longitude");
+
+        if (longitude && data.longitude !== undefined) {
+            longitude.textContent = data.longitude.toFixed(4) + "°";
+        }
+
+        // Altitude
+        const altitude = document.getElementById("digital-twin-altitude");
+
+        if (altitude && data.altitude_km !== undefined) {
+            altitude.textContent = data.altitude_km.toFixed(2) + " km";
+        }
+
+        // Fuel
+        const fuel = document.getElementById("digital-twin-fuel");
+
+        if (fuel && data.fuel_percentage !== undefined) {
+            fuel.textContent = data.fuel_percentage + "%";
+        }
+        // Status
+        const status = document.getElementById("digital-twin-status");
+
+        if (status && data.risk_status !== undefined) {
+            status.textContent = data.risk_status;
+        }
+        
+ 
+
+    } catch (error) {
+
+        console.error("Digital Twin API Error:", error);
+
+    }
+
+}
+
+loadDigitalTwin();
+setInterval(loadDigitalTwin, 5000);
