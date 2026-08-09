@@ -576,6 +576,54 @@ async function loadPrediction() {
             const approach = document.getElementById("closest-approach");
             if (approach)
                 approach.textContent = prediction.distance_km + " km";
+            // AI Maneuver Recommendation Card
+
+const recommendedManeuver =
+    document.getElementById("recommended-maneuver");
+
+const maneuverFuel =
+    document.getElementById("maneuver-fuel");
+
+const maneuverConfidence =
+    document.getElementById("maneuver-confidence");
+
+const maneuverExplanation =
+    document.getElementById("maneuver-explanation");
+
+if (recommendedManeuver) {
+
+    const action =
+        prediction.recommended_action || "No maneuver required";
+
+    recommendedManeuver.textContent = action;
+
+    if (action === "No Maneuver") {
+
+        recommendedManeuver.style.color = "#22c55e";
+
+    } else if (
+        action.toLowerCase().includes("monitor")
+    ) {
+
+        recommendedManeuver.style.color = "#facc15";
+
+    } else {
+
+        recommendedManeuver.style.color = "#ef4444";
+
+    }
+}
+if (maneuverFuel)
+    maneuverFuel.textContent =
+        (prediction.fuel_consumption || "0") + "%";
+
+if (maneuverConfidence)
+    maneuverConfidence.textContent =
+        (prediction.confidence || "0") + "%";
+
+if (maneuverExplanation)
+    maneuverExplanation.textContent =
+        prediction.reason || "Waiting for collision analysis...";
 
             // New Collision Prediction Card Updates
             const predictionStatus = document.getElementById("prediction-status");
@@ -595,6 +643,12 @@ async function loadPrediction() {
                 predictionConfidence.textContent = prediction.confidence + "%";
 
             console.log("Prediction Loaded:", prediction);
+            console.log("🤖 AI MANEUVER DATA:", {
+    action: prediction.recommended_action,
+    fuel: prediction.fuel_consumption,
+    confidence: prediction.confidence,
+    reason: prediction.reason
+});
 
         }
 

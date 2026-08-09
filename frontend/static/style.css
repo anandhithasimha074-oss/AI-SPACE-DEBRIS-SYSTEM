@@ -1653,4 +1653,49 @@ h2 {
         transform: scale(1.2);
     }
 
-}                                                                     
+
+}        
+/* =============================
+   AI Maneuver Recommendation
+   ============================= */
+
+#recommended-maneuver {
+    font-weight: 700;
+}
+
+#maneuver-fuel {
+    font-weight: 600;
+}
+
+#maneuver-confidence {
+    font-weight: 700;
+    color: #38bdf8;
+}
+
+#maneuver-explanation {
+    display: block;
+    margin-top: 8px;
+    padding: 10px;
+    border-radius: 8px;
+    background: rgba(34, 197, 94, 0.08);
+    line-height: 1.5;
+}  
+/* AI Maneuver Decision Panel */
+
+#maneuver-fuel,
+#maneuver-confidence {
+    font-weight: 700;
+}
+
+#maneuver-explanation {
+    display: block;
+    margin-top: 10px;
+    padding: 12px;
+    border-radius: 10px;
+    line-height: 1.5;
+    background: rgba(56, 189, 248, 0.08);
+}
+
+#recommended-maneuver {
+    font-weight: 700;
+}                                                           
