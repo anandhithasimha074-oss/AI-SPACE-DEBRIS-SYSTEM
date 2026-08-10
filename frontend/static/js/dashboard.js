@@ -521,6 +521,31 @@ async function loadPrediction() {
 
             const prediction = data[0].predictions[0];
             // =============================
+            // =============================
+// AI Collision Prediction Data
+// =============================
+
+            const nearestObject = document.getElementById("nearest-object");
+            const collisionProbability = document.getElementById("mission-probability");
+            const closestApproach = document.getElementById("closest-approach");
+            const riskLevel = document.getElementById("mission-risk");
+
+            if (nearestObject) {
+                nearestObject.textContent = data[0].satellite_2;
+            }
+
+            if (closestApproach && prediction.distance_km !== undefined) {
+                closestApproach.textContent =
+                prediction.distance_km.toFixed(2) + " km";
+            }
+
+            if (riskLevel && prediction.status !== undefined) {
+                riskLevel.textContent = prediction.status;
+            }
+            if (collisionProbability && prediction.confidence !== undefined) {
+                collisionProbability.textContent =
+                  prediction.confidence.toFixed(1) + "% confidence";
+            }
 // Reinforcement Learning Data
 // =============================
 
@@ -528,6 +553,9 @@ async function loadPrediction() {
             const priority = document.getElementById("threat-level");
             const fuel = document.getElementById("fuel-consumption");
             const reason = document.getElementById("maneuver-reason");
+            const aiAction = document.getElementById("ai-recommended-action");
+            const aiPriority = document.getElementById("ai-priority");
+            const aiExplanation = document.getElementById("ai-explanation");
 
             if (action)
                 action.textContent = prediction.recommended_action;
@@ -540,6 +568,15 @@ async function loadPrediction() {
 
             if (reason)
                 reason.textContent = prediction.reason;
+            if (aiAction)
+                aiAction.textContent = prediction.recommended_action;
+
+            if (aiPriority)
+                aiPriority.textContent = prediction.priority;
+
+            if (aiExplanation)
+                aiExplanation.textContent = prediction.reason;
+            
             // Satellite Protection
             const satelliteStatus = document.getElementById("satellite-status");
             const threatLevel = document.getElementById("threat-level");
@@ -561,7 +598,7 @@ async function loadPrediction() {
             }
 
             // Existing Dashboard Updates
-            const nearestObject = document.getElementById("nearest-object");
+           
             if (nearestObject)
                 nearestObject.textContent = data[0].satellite_2;
 
