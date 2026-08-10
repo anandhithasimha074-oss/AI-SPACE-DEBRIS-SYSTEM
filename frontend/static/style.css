@@ -1699,3 +1699,50 @@ h2 {
 #recommended-maneuver {
     font-weight: 700;
 }                                                           
+#satellite-table-body td span {
+    color: #22c55e !important;
+    font-weight: 700 !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    display: inline-block !important;
+}
+
+.fuel-cell {
+    position: relative;
+    width: 100px;
+    height: 18px;
+    background: #1e293b;
+    border-radius: 9px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+}
+
+.fuel-bar-table {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    background: #22c55e;
+    border-radius: 9px;
+}
+
+.fuel-bar-table {
+    height: 100%;
+    background: #22c55e;
+    border-radius: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white !important;
+    font-size: 11px;
+    font-weight: bold;
+    min-width: 30px;
+}
+
+.satellite-last-updated {
+    margin-top: 8px;
+    text-align: centre;
+    font-size: 12px;
+    color: #94a3b8;
+}

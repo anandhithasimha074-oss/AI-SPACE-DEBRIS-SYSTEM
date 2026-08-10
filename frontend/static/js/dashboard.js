@@ -1,6 +1,8 @@
+
 document.addEventListener("DOMContentLoaded", function () {
 
     console.log("AI Space Debris Tracking System Running");
+    
 
     // -----------------------------
     // Debris Activity Chart
@@ -520,6 +522,7 @@ async function loadPrediction() {
         if (data.length > 0) {
 
             const prediction = data[0].predictions[0];
+            
             // =============================
 // Reinforcement Learning Data
 // =============================
@@ -727,3 +730,101 @@ async function loadDigitalTwin() {
 
 loadDigitalTwin();
 setInterval(loadDigitalTwin, 5000);
+
+// =============================
+// Real-Time Satellite Fleet Data
+// =============================
+
+async function loadSatelliteFleet() {
+
+    try {
+
+        const response = await fetch("http://127.0.0.1:8000/satellites");
+
+        if (!response.ok) {
+            throw new Error("Satellite API failed");
+        }
+
+        const satellites = await response.json();
+
+        const tableBody =
+            document.getElementById("satellite-table-body");
+
+        if (!tableBody) {
+            console.error("Satellite table body not found");
+            return;
+        }
+
+        tableBody.innerHTML = "";
+        const updatedTime = new Date().toLocaleTimeString();
+
+        satellites.forEach((satellite, index) => {
+
+            let orbit = "LEO";
+
+            if (
+                satellite.altitude_km >= 2000 &&
+                satellite.altitude_km < 35786
+            ) {
+                orbit = "MEO";
+
+            } else if (satellite.altitude_km >= 35786) {
+                orbit = "GEO";
+            }
+
+            const fuelLevels = [100, 90, 80, 70, 60];
+
+            const fuel =
+                fuelLevels[index] !== undefined
+                    ? fuelLevels[index]
+                    : 50;
+
+            const row = document.createElement("tr");
+            row.innerHTML = `
+            <td>${satellite.id}</td>
+            <td>${orbit}</td>
+            <td>${satellite.altitude_km} km</td>
+            <td>${satellite.velocity_kms} km/s</td>
+            <td>
+    <div style="display:flex; align-items:center; gap:8px;">
+        <div class="fuel-cell">
+            <div class="fuel-bar-table" style="width:${fuel}%"></div>
+        </div>
+        <strong style="color:white !important;">${fuel}%</strong>
+    </div>
+</td>
+            <td>${satellite.threat_level || "SAFE"}</td>
+            <td>
+                <span style=" color: #22c55e; font-weight: bold;">
+                    SAFE
+                </span>
+            </td>
+`;
+
+tableBody.appendChild(row);
+
+        });
+
+        console.log(
+            "🛰 Real Satellite Fleet Loaded:",
+            satellites
+        );
+        const lastUpdated = document.getElementById("satellite-last-updated");
+
+if (lastUpdated) {
+    lastUpdated.textContent = "Last Updated: " + updatedTime;
+}
+
+    } catch (error) {
+
+        console.error(
+            "Satellite Fleet API Error:",
+            error
+        );
+
+    }
+
+}
+
+loadSatelliteFleet();
+setInterval(loadSatelliteFleet, 10000);
