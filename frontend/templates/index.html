@@ -511,6 +511,8 @@ Velocity:
 </section>
 <!-- ===================== SATELLITE FLEET STATUS ===================== -->
 
+<!-- ===================== SATELLITE FLEET STATUS ===================== -->
+
 <section id="satellite" class="analytics">
 
     <h2>🛰 Satellite Fleet Status</h2>
@@ -525,54 +527,25 @@ Velocity:
                     <th>Orbit</th>
                     <th>Altitude</th>
                     <th>Velocity</th>
-                    <th>Fuel</th>
+                    <th>Fuel Reserver</th>
+                    <th>Threat Level</th>
                     <th>Status</th>
                 </tr>
             </thead>
 
-            <tbody>
-
-                <tr>
-                    <td>SAT-001</td>
-                    <td>LEO</td>
-                    <td>550 km</td>
-                    <td>7.6 km/s</td>
-                    <td>74%</td>
-                    <td><span class="safe">SAFE</span></td>
-                </tr>
-
-                <tr>
-                    <td>SAT-002</td>
-                    <td>MEO</td>
-                    <td>20200 km</td>
-                    <td>3.9 km/s</td>
-                    <td>61%</td>
-                    <td><span class="warning">MONITORING</span></td>
-                </tr>
-
-                <tr>
-                    <td>SAT-003</td>
-                    <td>GEO</td>
-                    <td>35786 km</td>
-                    <td>3.1 km/s</td>
-                    <td>90%</td>
-                    <td><span class="safe">SAFE</span></td>
-                </tr>
-
-                <tr>
-                    <td>SAT-004</td>
-                    <td>LEO</td>
-                    <td>600 km</td>
-                    <td>7.8 km/s</td>
-                    <td>45%</td>
-                    <td><span class="danger">HIGH RISK</span></td>
-                </tr>
-
+            <tbody id="satellite-table-body">
+                <!-- Real satellite data will be inserted here by dashboard.js -->
             </tbody>
 
         </table>
 
     </div>
+    <div id="satellite-last-updated" class="satellite-last-updated">
+    Last Updated: --
+</div>
+<div class="fuel-model-note">
+    Fuel values are modelled using the Digital Twin simulation, not live telemetry.
+</div>
 
 </section>
 
