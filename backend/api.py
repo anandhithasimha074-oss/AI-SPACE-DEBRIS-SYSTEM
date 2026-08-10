@@ -10,7 +10,8 @@ from backend.reinforcement_agent import reinforcement_decision
 from backend.config import (
     API_TITLE,
     API_VERSION,
-    CELESTRAK_URL
+    CELESTRAK_URL,
+    SATELLITES_TO_ANALYZE
 )
 
 app = FastAPI(
@@ -121,3 +122,69 @@ def history():
         }
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.get("/satellites")
+def satellites():
+    try:
+        satellites = load.tle_file(CELESTRAK_URL)
+        satellites = satellites[:SATELLITES_TO_ANALYZE]
+
+        satellite_data = []
+
+        ts = load.timescale()
+        current_time = ts.now()
+
+        for index, sat in enumerate(satellites):
+
+            position = sat.at(current_time).position.km
+            velocity = sat.at(current_time).velocity.km_per_s
+
+            altitude = round(
+                float(
+                    (position[0] ** 2 +
+                     position[1] ** 2 +
+                     position[2] ** 2) ** 0.5
+                    - 6371
+                ),
+                2
+            )
+
+            speed = round(
+                float(
+                    (velocity[0] ** 2 +
+                     velocity[1] ** 2 +
+                     velocity[2] ** 2) ** 0.5
+                ),
+                2
+            )
+
+            # Estimated fuel level for dashboard simulation
+            fuel_levels = [100, 90, 80, 70, 60]
+            fuel = fuel_levels[index % len(fuel_levels)]
+
+            # Determine satellite status
+            if altitude < 300:
+                status = "MONITORING"
+            elif altitude < 2000:
+                status = "SAFE"
+            elif altitude < 35786:
+                status = "SAFE"
+            else:
+                status = "SAFE"
+
+            satellite_data.append({
+                "id": sat.name,
+                "altitude_km": altitude,
+                "velocity_kms": speed,
+                "fuel_percentage": fuel,
+                "status": status
+            })
+
+        return satellite_data
+
+    except Exception as e:
+        raise HTTPException(
+            status_code=500,
+            detail=str(e)
+        )
