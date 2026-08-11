@@ -437,30 +437,54 @@ setInterval(updateDashboard, 5000);
 updateClock();   
 });
 // =============================
-// Search Function
+// Debris Search
 // =============================
 
 const searchInput = document.querySelector(".search-box input");
 const searchButton = document.querySelector(".search-box button");
 
-if (searchButton) {
+if (searchButton && searchInput) {
 
     searchButton.addEventListener("click", function () {
 
         const value = searchInput.value.trim().toUpperCase();
+        const rows = document.querySelectorAll("#debris-table-body tr");
 
         if (value === "") {
-
-            alert("Please enter a Satellite ID or Debris ID.");
-
-        } else {
-
-            alert("Searching for: " + value);
-
+            rows.forEach(row => {
+                row.style.display = "";
+            });
+            return;
         }
 
+        rows.forEach(row => {
+
+            const debrisId = row.cells[0]?.textContent
+                .trim()
+                .toUpperCase();
+
+            row.style.display =
+                debrisId.includes(value) ? "" : "none";
+        });
     });
 
+    searchInput.addEventListener("input", function () {
+
+        const value = searchInput.value.trim().toUpperCase();
+        const rows = document.querySelectorAll("#debris-table-body tr");
+
+        rows.forEach(row => {
+
+            const debrisId = row.cells[0]?.textContent
+                .trim()
+                .toUpperCase();
+
+            row.style.display =
+                value === "" || debrisId.includes(value)
+                    ? ""
+                    : "none";
+        });
+    });
 }
 // =============================
 // Simulation Controls
@@ -969,3 +993,56 @@ if (lastUpdated) {
 
 loadSatelliteFleet();
 setInterval(loadSatelliteFleet, 10000);
+async function loadDebrisTable() {
+    try {
+        const response = await fetch("http://127.0.0.1:8000/debris");
+
+        if (!response.ok) {
+            throw new Error(`Debris API returned ${response.status}`);
+        }
+
+        const debrisData = await response.json();
+        debrisData.splice(8);
+
+        console.log("Debris data received:", debrisData);
+
+        const tableBody = document.getElementById("debris-table-body");
+
+        if (!tableBody) {
+            console.error("Debris table body not found");
+            return;
+        }
+
+        tableBody.innerHTML = "";
+
+        debrisData.forEach(debris => {
+            const row = document.createElement("tr");
+
+            let riskClass = "";
+
+            if (debris.risk === "HIGH") {
+                riskClass = "danger";
+            } else if (debris.risk === "MEDIUM") {
+                riskClass = "warning";
+            } else {
+                riskClass = "safe";
+            }
+
+            row.innerHTML = `
+                <td>${debris.id}</td>
+                <td>${debris.orbit}</td>
+                <td>${debris.velocity_kms} km/s</td>
+                <td>${debris.distance_km} km</td>
+                <td class="${riskClass}">${debris.risk}</td>
+                <td>${debris.status}</td>
+            `;
+
+            tableBody.appendChild(row);
+        });
+
+    } catch (error) {
+        console.error("Debris API error:", error);
+    }
+}
+
+loadDebrisTable();
