@@ -1,6 +1,6 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from skyfield.api import load
+from skyfield.api import load, EarthSatellite
 
 from backend.collision_predictor import predict_collision
 from backend.ai_model import predict_collision as ai_predict_collision
@@ -13,6 +13,7 @@ from backend.config import (
     CELESTRAK_URL,
     SATELLITES_TO_ANALYZE
 )
+DEBRIS_CELESTRAK_URL = "https://celestrak.org/NORAD/elements/gp.php?NAME=COSMOS%202251%20DEB&FORMAT=TLE"
 
 app = FastAPI(
     title=API_TITLE,
@@ -123,7 +124,90 @@ def history():
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
+@app.get("/debris")
+def debris():
+    try:
+        import requests
 
+        response = requests.get(
+            DEBRIS_CELESTRAK_URL,
+            timeout=10
+        )
+        response.raise_for_status()
+
+        lines = response.text.strip().splitlines()
+
+        debris_satellites = []
+
+        for i in range(0, len(lines) - 2, 3):
+            name = lines[i].strip()
+            line1 = lines[i + 1].strip()
+            line2 = lines[i + 2].strip()
+
+            if "COSMOS 2251 DEB" in name:
+                debris_satellites.append(
+                    EarthSatellite(line1, line2, name)
+                )
+
+        debris_satellites = debris_satellites[:8]
+
+        ts = load.timescale()
+        current_time = ts.now()
+
+        debris_data = []
+
+        for index, sat in enumerate(debris_satellites):
+
+            position = sat.at(current_time).position.km
+            velocity = sat.at(current_time).velocity.km_per_s
+
+            distance_from_earth = (
+                (position[0] ** 2 +
+                 position[1] ** 2 +
+                 position[2] ** 2) ** 0.5
+            )
+
+            altitude = distance_from_earth - 6371
+
+            speed = (
+                (velocity[0] ** 2 +
+                 velocity[1] ** 2 +
+                 velocity[2] ** 2) ** 0.5
+            )
+
+            if altitude < 2000:
+                orbit = "LEO"
+            elif altitude < 35786:
+                orbit = "MEO"
+            else:
+                orbit = "GEO"
+
+            if altitude < 500:
+                risk = "HIGH"
+                status = "Critical"
+            elif altitude < 1000:
+                risk = "MEDIUM"
+                status = "Monitoring"
+            else:
+                risk = "LOW"
+                status = "Safe"
+
+            debris_data.append({
+                "id": f"{sat.name}-{sat.model.satnum}",
+                "orbit": orbit,
+                "velocity_kms": round(float(speed), 2),
+                "distance_km": round(float(altitude), 2),
+                "risk": risk,
+                "status": status
+            })
+
+        return debris_data
+
+    except Exception as e:
+        raise HTTPException(
+            status_code=500,
+            detail=str(e)
+        )
 @app.get("/satellites")
 def satellites():
     try:
