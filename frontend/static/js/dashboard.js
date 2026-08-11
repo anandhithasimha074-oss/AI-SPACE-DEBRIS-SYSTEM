@@ -17,10 +17,10 @@ document.addEventListener("DOMContentLoaded", function () {
         debrisChart = new Chart(debrisChartCanvas, {
     type: "line",
     data: {
-        labels: ["00:00","04:00","08:00","12:00","16:00","20:00"],
+        labels: [],
         datasets: [{
             label: "Tracked Debris Objects",
-            data: [820,950,1100,1180,1250,1320],
+            data: [],
             borderColor: "#38bdf8",
             backgroundColor: "rgba(56,189,248,0.1)",
             borderWidth: 3,
@@ -48,10 +48,10 @@ document.addEventListener("DOMContentLoaded", function () {
         riskChart = new Chart(riskChartCanvas, {
     type: "line",
     data: {
-        labels: ["Day 1","Day 2","Day 3","Day 4","Day 5","Day 6"],
+        labels: [],
         datasets: [{
             label: "Collision Risk %",
-            data: [4,6,5,8,3,2],
+            data: [],
             borderColor: "#38bdf8",
             backgroundColor: "rgba(248, 56, 56, 0.24)",
             borderWidth: 3,
@@ -66,7 +66,150 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
     }
+ // =====================================================
+// REAL-TIME GRAPH DATA FROM FASTAPI
+// =====================================================
 
+function updateGraph(chart, value) {
+    if (!chart || value === undefined || value === null) return;
+
+    const now = new Date();
+
+    const time =
+        now.getHours().toString().padStart(2, "0") +
+        ":" +
+        now.getMinutes().toString().padStart(2, "0") +
+        ":" +
+        now.getSeconds().toString().padStart(2, "0");
+
+    chart.data.labels.push(time);
+    chart.data.datasets[0].data.push(Number(value));
+
+    // Keep latest 10 readings
+    if (chart.data.labels.length > 10) {
+        chart.data.labels.shift();
+        chart.data.datasets[0].data.shift();
+    }
+
+    chart.update();
+}
+
+
+// -----------------------------------------------------
+// Debris Activity Graph
+// Uses real satellite data from /satellites
+// -----------------------------------------------------
+
+async function updateDebrisGraph() {
+
+    try {
+
+        const response =
+            await fetch("http://127.0.0.1:8000/satellites");
+
+        if (!response.ok) {
+            throw new Error("Satellite API failed");
+        }
+
+        const satellites = await response.json();
+
+        // Number of satellites/objects returned by backend
+        const trackedObjects = satellites.length;
+
+        updateGraph(
+            debrisChart,
+            trackedObjects
+        );
+
+        console.log(
+            "REAL-TIME GRAPH - Tracked Objects:",
+            trackedObjects
+        );
+
+    } catch (error) {
+
+        console.error(
+            "Debris Graph API Error:",
+            error
+        );
+
+    }
+}
+
+
+// -----------------------------------------------------
+// Collision Risk Graph
+// Uses real AI prediction data from /predict
+// -----------------------------------------------------
+
+async function updateRiskGraph() {
+
+    try {
+
+        const response =
+            await fetch("http://127.0.0.1:8000/predict");
+
+        if (!response.ok) {
+            throw new Error("Prediction API failed");
+        }
+
+        const data = await response.json();
+
+        if (!data || data.length === 0) {
+            return;
+        }
+
+        const prediction =
+            data[0].predictions[0];
+
+        if (!prediction) {
+            return;
+        }
+
+        // Backend AI confidence
+        const confidence =
+            Number(prediction.confidence);
+
+        if (!isNaN(confidence)) {
+
+            updateGraph(
+                riskChart,
+                confidence
+            );
+
+            console.log(
+                "REAL-TIME GRAPH - AI Confidence:",
+                confidence + "%"
+            );
+        }
+
+    } catch (error) {
+
+        console.error(
+            "Risk Graph API Error:",
+            error
+        );
+
+    }
+}
+
+
+// -----------------------------------------------------
+// Update graphs every 5 seconds
+// -----------------------------------------------------
+
+updateDebrisGraph();
+updateRiskGraph();
+
+setInterval(
+    updateDebrisGraph,
+    5000
+);
+
+setInterval(
+    updateRiskGraph,
+    5000
+);
     // -----------------------------
     // Live Dashboard Simulation
     // -----------------------------
@@ -202,21 +345,7 @@ if (alertBanner) {
 
         // Update charts
 
-        if (debrisChart) {
-
-            debrisChart.data.datasets[0].data.shift();
-            debrisChart.data.datasets[0].data.push(detected);
-            debrisChart.update();
-
-        }
-
-        if (riskChart) {
-
-            riskChart.data.datasets[0].data.shift();
-            riskChart.data.datasets[0].data.push(probability);
-            riskChart.update();
-
-        }
+        
         // -----------------------------
 // Satellite Health Bars
 // -----------------------------
@@ -357,32 +486,7 @@ if (startBtn) {
         simulationRunning = true;
         document.getElementById("simulation-status").innerText = "RUNNING";
 
-       simulationInterval = setInterval(() => {
-
-    let debrisValue = Math.floor(35000 + Math.random() * 500);
-
-    let riskValue = (Math.random() * 10).toFixed(2);
-
-
-    if(document.getElementById("debris-count"))
-        document.getElementById("debris-count").innerText = debrisValue;
-
-
-    if(document.getElementById("collision-risk"))
-        document.getElementById("collision-risk").innerText = riskValue + "%";
-
-
-    if(document.getElementById("objects-detected"))
-        document.getElementById("objects-detected").innerText =
-        Math.floor(Math.random() * 300 + 1200);
-
-
-    if(document.getElementById("collision-probability"))
-        document.getElementById("collision-probability").innerText =
-        riskValue + "%";
-
-
-}, 2000);
+       
 
     });
 
