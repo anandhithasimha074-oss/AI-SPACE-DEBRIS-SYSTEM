@@ -220,6 +220,7 @@ setInterval(
 
     async function updateDashboard() {
 
+        console.log("Dashboard updating...");
         let detected = 0;
         const tracked = random(34000, 36000);
         const probability = random(1, 10);
@@ -227,6 +228,22 @@ setInterval(
         try {
             const debrisResponse = await fetch("http://127.0.0.1:8000/debris");
             const debrisData = await debrisResponse.json();
+            // Tracking Statistics
+            document.getElementById("tracking-count").textContent = debrisData.length;
+
+            const highRisk = debrisData.filter(
+                item => item.risk === "HIGH"
+            ).length;
+            console.log("Tracking Count:", debrisData.length);
+            console.log("High Risk:", highRisk);
+
+            document.getElementById("active-satellites").textContent =
+                debrisData.filter(item => item.orbit === "LEO").length;
+
+            document.getElementById("new-debris").textContent = highRisk;
+
+            document.getElementById("tracking-status").textContent =
+                highRisk > 0 ? "ALERT" : "ACTIVE";
 
             const predictResponse = await fetch("http://127.0.0.1:8000/predict");
             const predictData = await predictResponse.json();
@@ -299,8 +316,10 @@ if (alertBanner) {
             document.getElementById("objects-tracked").textContent = tracked;
 
         if (document.getElementById("tracking-count"))
-            document.getElementById("tracking-count").textContent = tracked;
-
+            document.getElementById("tracking-count").textContent = debrisData.length;
+            document.getElementById("active-satellites").textContent =
+                debrisData.filter(item => item.orbit === "LEO").length;
+           
         if (document.getElementById("collision-probability"))
             document.getElementById("collision-probability").textContent = probability + "%";
 
