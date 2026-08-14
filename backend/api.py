@@ -7,7 +7,7 @@ from backend.ai_model import predict_collision as ai_predict_collision
 from digital_twin.twin import DigitalTwin
 from database.database import get_prediction_history
 from backend.reinforcement_agent import reinforcement_decision
-from backend.config import (
+from  backend.config import (
     API_TITLE,
     API_VERSION,
     CELESTRAK_URL,

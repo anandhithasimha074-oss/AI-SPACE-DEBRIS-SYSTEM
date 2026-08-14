@@ -218,18 +218,32 @@ setInterval(
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
-    function updateDashboard() {
+    async function updateDashboard() {
 
-        const detected = random(1200, 1400);
+        let detected = 0;
         const tracked = random(34000, 36000);
         const probability = random(1, 10);
-        const confidence = random(90, 99);
+        let confidence = 0;
+        try {
+            const debrisResponse = await fetch("http://127.0.0.1:8000/debris");
+            const debrisData = await debrisResponse.json();
+
+            const predictResponse = await fetch("http://127.0.0.1:8000/predict");
+            const predictData = await predictResponse.json();
+
+            detected = debrisData.length;
+            confidence = predictData[0]?.predictions?.at(-1)?.confidence ?? 0;
+            } 
+            catch (error) {
+            console.error("Debris Detection Error:", error);
+            }
+        
         // Satellite Health Simulation
 
-const battery = random(80, 100);
-const fuel = random(60, 95);
-const signal = random(85, 100);
-
+        const battery = random(80, 100);
+        const fuel = random(60, 95);
+        const signal = random(85, 100);
+           
         const nearestObject = "DEB-" + random(1000, 9999);
 
         let risk = "LOW";
@@ -295,6 +309,8 @@ if (alertBanner) {
 
         if (document.getElementById("ai-confidence"))
             document.getElementById("ai-confidence").textContent = confidence + "%";
+        if (document.getElementById("detection-status"))
+            document.getElementById("detection-status").textContent = "Active";
 
         if (document.getElementById("nearest-object"))
             document.getElementById("nearest-object").textContent = nearestObject;
@@ -378,6 +394,8 @@ if (signalBar) {
 }
 
     }
+    updateDashboard();
+    setInterval(updateDashboard, 5000);
 
  // Run dashboard once
 updateDashboard();
